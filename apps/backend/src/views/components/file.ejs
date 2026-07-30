@@ -1,0 +1,23 @@
+
+<div class="file-container <%= locals.shareToken && "file-container-shared" %>">
+    <a href="/folder/<%= locals.folderId ?? 0  %>/file/<%= locals.file?.id %>">
+        <svg width="32" height="32" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><!--!Font Awesome Free v7.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
+            <path d="M304 112L192 112C183.2 112 176 119.2 176 128L176 512C176 520.8 183.2 528 192 528L448 528C456.8 528 464 520.8 464 512L464 272L376 272C336.2 272 304 239.8 304 200L304 112zM444.1 224L352 131.9L352 200C352 213.3 362.7 224 376 224L444.1 224zM128 128C128 92.7 156.7 64 192 64L325.5 64C342.5 64 358.8 70.7 370.8 82.7L493.3 205.3C505.3 217.3 512 233.6 512 250.6L512 512C512 547.3 483.3 576 448 576L192 576C156.7 576 128 547.3 128 512L128 128z"/>
+        </svg>
+        <h3><%= locals.file.name %></h3>
+    </a>
+    <h3><%= formatBytes(locals.file.size) %></h3>
+    <h3><%= locals.file.uploadedAt.toISOString().slice(0,10) %></h3>
+    <h3><%= locals.file.updatedAt.toISOString().slice(0,10) %></h3>
+    <h3><%= locals.file.mimeType %></h3>
+    <% if (!locals.shareToken) { %>
+        <a href="/folder/<%= locals.folderId ?? 0 %>/file/<%= locals.file?.id %>/edit">
+            <svg width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <g>
+                    <path fill="none" d="M0 0h24v24H0z"/>
+                    <path d="M15.728 9.686l-1.414-1.414L5 17.586V19h1.414l9.314-9.314zm1.414-1.414l1.414-1.414-1.414-1.414-1.414 1.414 1.414 1.414zM7.242 21H3v-4.243L16.435 3.322a1 1 0 0 1 1.414 0l2.829 2.829a1 1 0 0 1 0 1.414L7.243 21z"/>
+                </g>
+            </svg>
+        </a>
+    <% } %>
+</div>

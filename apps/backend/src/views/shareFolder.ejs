@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("partials/head") %>
+<body class="share-folder-page">
+    <% if (locals.shareURL) { %>
+        <h1>You can share the folder for a day with the following link:</h1>
+        <h2><%= locals.shareURL %></h2>
+    <% } else { %>
+        <h1>The shared link has expired!</h1>
+    <% } %>
+    <a href="/">Click here to return to the Homepage</a>
+</body>
+</html>

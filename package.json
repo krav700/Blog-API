@@ -1,0 +1,16 @@
+{
+  "name": "blog-api",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": ["apps/*", "packages/*"],
+  "main": "index.js",
+  "scripts": {
+    "frontend": "npm run dev --workspace frontend",
+    "admin": "npm run dev --workspace admin",
+    "backend": "npm run dev --workspace backend"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

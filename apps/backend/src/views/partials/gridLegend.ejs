@@ -1,0 +1,32 @@
+<div class="grid-legend <%= locals.shareToken && "grid-legend-share" %>">
+    <form action="<%= locals.shareToken ? `/folder/share/${shareToken}/sort/name` : locals.folderId ? `/folder/${locals.folderId}/sort/name` : "/sort/name" %>" method="get">
+        <button>
+            <h2>Name</h2>
+        </button>
+    </form>
+    <form action="<%= locals.shareToken ? `/folder/share/${shareToken}/sort/size` : locals.folderId ? `/folder/${locals.folderId}/sort/size` : "/sort/size" %>" method="get">
+        <button>
+            <h2>Size</h2>
+        </button>
+    </form>
+    <form action="<%= locals.shareToken ? `/folder/share/${shareToken}/sort/uploadedAt` : locals.folderId ? `/folder/${locals.folderId}/sort/uploadedAt` : "/sort/uploadedAt" %>" method="get">
+        <button>
+            <h2>Uploaded At</h2>
+        </button>
+    </form>
+    <form action="<%= locals.shareToken ? `/folder/share/${shareToken}/sort/updatedAt` : locals.folderId ? `/folder/${locals.folderId}/sort/updatedAt` : "/sort/updatedAt" %>" method="get">
+        <button>
+            <h2>Updated At</h2>
+        </button>
+    </form>
+    <form action="<%= locals.shareToken ? `/folder/share/${shareToken}/sort/mimeType` : locals.folderId ? `/folder/${locals.folderId}/sort/mimeType` : "/sort/mimeType" %>" method="get">
+        <button>
+            <h2>Type</h2>
+        </button>
+    </form>
+    <% if(!locals.shareToken) { %>
+        <form action="">
+            <h2 class="grid-legend-edit">Edit/Share</h2>
+        </form>
+    <% } %>
+</div>

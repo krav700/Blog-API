@@ -1,0 +1,26 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <%- include("../partials/head") %>
+    <body class="form-page">
+        <%- include("../partials/errors") %>
+        <div class="auth-form">
+            <form method="post" action="/folder/<%= locals.folderId ? `${folderId}/` : '' %>create">
+                <fieldset>
+                    <legend>Create Folder</legend>
+                    <div class="create-folder">
+                        <label for="folder">Folder:</label>
+                        <input
+                            name="folder"
+                            id="folder"
+                            type="text"
+                            value="<%= locals.folder %>"
+                        />
+                    </div>
+                    <button type="submit">Submit</button>
+                </fieldset>
+            </form>
+            <%- include('../components/goBackButton') %>
+        </div>
+    </body>
+</html>

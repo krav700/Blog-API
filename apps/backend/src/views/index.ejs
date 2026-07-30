@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("partials/head") %>
+
+<body>
+  <%- include("partials/heading") %>
+  
+  <% if (locals.user) { %>
+  <%- include("partials/gridLegend") %>
+
+  <div class="content-container">
+    <% if (locals.folders) { %>
+        <% folders.forEach(folder => { %>
+            <%- include("components/folder", { folder: folder }) %>
+        <% }) %>
+    <% } %>
+    <% if (locals.files ) { %>
+        <% files.forEach(file => { %>
+                <%- include("components/file", { folderId: 0, file: file }) %>
+            <% }) %>
+    <% } %>
+
+    <div class="add-component-container">
+      <a href="/folder/0/create">Add Folder</a>
+      <a href="/folder/0/file/create">Add File</a>
+    </div>
+  </div>
+  <% } else { %>
+    <div class="greeting-container">
+        <div class="greeting-text">
+            <h2>Welcome to File Upload!</h2>
+            <h3>To start using the app, you must have an account...</h3>
+        </div>
+        <div>
+            <a href="/auth/register">Register</a>
+            <a href="/auth/login">Login</a>
+        </div>
+    </div>
+  <% } %>
+</body>
+
+</html>

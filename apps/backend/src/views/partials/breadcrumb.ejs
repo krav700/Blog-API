@@ -1,0 +1,10 @@
+<h3 class="breadcrumb-container">
+    <a href="/" >Home</a> /
+    <% for( let i = 0; i < locals.breadcrumbs.length; i++ ) { %>
+        <% if (i !== locals.breadcrumbs.length - 1) { %>
+            <a href="/folder/<%= breadcrumbs[i].folderId %>" ><%= breadcrumbs[i].name %></a> /
+        <% } else { %>
+                <%= breadcrumbs[i].name %>
+        <% } %>
+    <% } %>
+</h3>
