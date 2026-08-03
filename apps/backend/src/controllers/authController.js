@@ -2,6 +2,8 @@ const { body, validationResult, matchedData } = require("express-validator");
 const passwordUtils = require("../lib/passwordUtils.js");
 const { prisma } = require("../lib/prisma.js");
 const passport = require("passport");
+const jwt = require('jsonwebtoken');
+const verifyToken = require('../lib/verifyToken.js')
 
 const emptyErr = "must not be empty.";
 const lengthErr = "must be between 3 and 50 characters.";
@@ -71,6 +73,7 @@ function getLoginForm(req, res, next) {
 
 const loginUser = [
     validateLogin,
+    verifyToken,
     (req, res, next) => {
         return passport.authenticate("local", function (err, user, info) {
             if (err) {
@@ -89,7 +92,11 @@ const loginUser = [
                     return next(err);
                 }
 
-                return res.redirect("/");
+                jwt.sign({user}, process.env.JWT_SECRET_KEY, { expiresIn: '2d' } ,(err, token) => {
+                    return res.json({
+                        token
+                    })
+                });
             });
         })(req, res, next);
     },
