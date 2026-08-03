@@ -16,65 +16,41 @@ datasource db {
 }
 
 model User {
-  id             Int      @id @default(autoincrement())
+  id             String      @id @default(uuid()) @db.Uuid
   firstName      String   @db.VarChar(50)
   lastName       String   @db.VarChar(50)
+  email          String   @unique
   username       String   @unique @db.VarChar(50)
   hash           String
   salt           String
   iterationCount Int
-  homeFiles      File[]
-  folders        Folder[]
 }
 
-model Folder {
-  id   Int    @id @default(autoincrement())
-  name String @db.VarChar(50)
+model BlogPost {
+  id String @id @default(uuid()) @db.Uuid
+  
+  title String
+  body String
 
-  files File[]
+  createdAt DateTime @default(Date.now())
+  updatedAt DateTime @default(Date.now())
 
-  userId Int
-  user   User @relation(fields: [userId], references: [id])
-
-  parentId Int?
-  parent   Folder?  @relation("@FolderHierarchy", fields: [parentId], references: [id])
-  children Folder[] @relation("@FolderHierarchy")
-
-  shares ShareableFolder[]
+  published Boolean
 }
 
-model File {
-  id          Int    @id @default(autoincrement())
-  name        String
-  url         String
-  mimeType    String
-  size        Int
-  storageName String
+model Comment {
+  id String @id @default(uuid()) @db.Uuid
 
-  userId Int  @default(5)
-  user   User @relation(fields: [userId], references: [id])
-
-  uploadedAt DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-
-  folderId Int?
-  folder   Folder? @relation(fields: [folderId], references: [id])
+  authorId String
+  authoredBy User @relation(fields: [authorId], references: [id])
+  
+  createdAt DateTime @default(Date.now())
 }
+
 
 model Session {
   id        String   @id
   sid       String   @unique
   data      String
-  expiresAt DateTime
-}
-
-model ShareableFolder {
-  id Int @default(autoincrement())
-  token String @unique
-
-  folderId Int
-  folder Folder @relation(fields: [folderId], references: [id], onDelete: Cascade)
-
-  createdAt DateTime @default(now())
   expiresAt DateTime
 }
