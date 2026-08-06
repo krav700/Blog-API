@@ -2,7 +2,10 @@
   "name": "blog-api",
   "version": "1.0.0",
   "private": true,
-  "workspaces": ["apps/*", "packages/*"],
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "main": "index.js",
   "scripts": {
     "frontend": "npm run dev --workspace frontend",

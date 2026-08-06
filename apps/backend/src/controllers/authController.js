@@ -68,12 +68,13 @@ const validateRegister = [
 ];
 
 function getLoginForm(req, res, next) {
-    res.render("forms/login", { title: "Login" });
+    // res.render("forms/login", { title: "Login" });
+    res.json({message: "this is a login form"})
 }
 
 const loginUser = [
     validateLogin,
-    verifyToken,
+    // verifyToken,
     (req, res, next) => {
         return passport.authenticate("local", function (err, user, info) {
             if (err) {
@@ -94,6 +95,7 @@ const loginUser = [
 
                 jwt.sign({user}, process.env.JWT_SECRET_KEY, { expiresIn: '2d' } ,(err, token) => {
                     return res.json({
+                        message: 'Login successfull',
                         token
                     })
                 });
@@ -103,12 +105,14 @@ const loginUser = [
 ];
 
 function getRegisterForm(req, res, next) {
-    res.render("forms/register", { title: "Register" });
+    // res.render("forms/register", { title: "Register" });
+    res.json({message: "this is a register form"})
 }
 
 const registerUser = [
     validateRegister,
     async (req, res, next) => {
+        console.log(req.body)
         const {
             "first-name": firstName,
             "last-name": lastName,
@@ -118,13 +122,14 @@ const registerUser = [
 
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.status(400).render("forms/register", {
-                title: "Register",
-                errors: errors.array(),
-                firstName,
-                lastName,
-                username,
-            });
+            return res.json({message: errors.array()})
+            // return res.status(400).render("forms/register", {
+            //     title: "Register",
+            //     errors: errors.array(),
+            //     firstName,
+            //     lastName,
+            //     username,
+            // });
         }
 
         const saltHash = passwordUtils.genPassword(password);
@@ -144,7 +149,8 @@ const registerUser = [
                     iterationCount: iterationCount,
                 },
             });
-
+            
+            return res.json({message: "Register successful"});
             res.redirect("/auth/login");
         } catch (err) {
             next(err);
