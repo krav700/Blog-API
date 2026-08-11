@@ -40,7 +40,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use("/", indexRouter);
+app.use("/api", indexRouter);
 
 const PORT = 3000;
 app.listen(process.env.PORT ?? PORT, (error) => {

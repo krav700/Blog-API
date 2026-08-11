@@ -74,7 +74,6 @@ function getLoginForm(req, res, next) {
 
 const loginUser = [
     validateLogin,
-    // verifyToken,
     (req, res, next) => {
         return passport.authenticate("local", function (err, user, info) {
             if (err) {
