@@ -15,6 +15,7 @@
 */
 
 function verifyToken(req, res, next) {
+    console.log(req.headers)
     const bearerHeader = req.headers['authorization'];
 
     if (typeof bearerHeader !== 'undefined') {

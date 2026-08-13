@@ -94,7 +94,7 @@ const loginUser = [
 
                 jwt.sign({user}, process.env.JWT_SECRET_KEY, { expiresIn: '2d' } ,(err, token) => {
                     return res.json({
-                        message: 'Login successfull',
+                        message: 'Login successful',
                         token
                     })
                 });
