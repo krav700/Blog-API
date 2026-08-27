@@ -35,7 +35,7 @@ model BlogPost {
   body String
 
   createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   published Boolean
 }
@@ -47,6 +47,7 @@ model Comment {
   authoredBy User @relation(fields: [authorId], references: [id])
   
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 

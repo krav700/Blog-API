@@ -6,13 +6,12 @@ const verifyAdmin = require('../lib/verifyAdmin.js')
 
 const adminRouter = Router();
 
-adminRouter.get("/", verifyToken, verifyAdmin, adminController.getHomePage);
-
-adminRouter.get("/users", verifyToken, verifyAdmin, adminController.getUsers );
+adminRouter.get("/users", verifyToken, verifyAdmin, adminController.getAllUsers );
+adminRouter.get("/users/:pageNum", verifyToken, verifyAdmin, adminController.getUsersByPage );
 adminRouter.delete("/users/:userId", verifyToken, verifyAdmin, adminController.getUserById);
 
 adminRouter.get("/blogs/:blogId", verifyToken, verifyAdmin, adminController.getBlogById);
-adminRouter.post("/blogs/:blogId", verifyToken, verifyAdmin, adminController.postBlogById);
+adminRouter.post("/blogs", verifyToken, verifyAdmin, adminController.postBlogById);
 adminRouter.put("/blogs/:blogId", verifyToken, verifyAdmin, adminController.updateBlogById);
 adminRouter.delete("/blogs/:blogId", verifyToken, verifyAdmin, adminController.deleteBlogById);
 
