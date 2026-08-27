@@ -6,16 +6,16 @@ const verifyAdmin = require('../lib/verifyAdmin.js')
 
 const adminRouter = Router();
 
-adminRouter.get("/", verifyToken, verifyAdmin, (req, res, next) => { return res.json({message: "admin panel"}) });
+adminRouter.get("/", verifyToken, verifyAdmin, adminController.getHomePage);
 
-adminRouter.get("/users", verifyToken, verifyAdmin, (req, res, next) => { return res.json({message: "get users"}) });
-adminRouter.delete("/users/:userId", verifyToken, verifyAdmin, (req, res, next) => { return res.json({message: "delete user"}) });
+adminRouter.get("/users", verifyToken, verifyAdmin, adminController.getUsers );
+adminRouter.delete("/users/:userId", verifyToken, verifyAdmin, adminController.getUserById);
 
-adminRouter.get("/blogs/:blogId", verifyToken, verifyAdmin, (req, res, next) => { return res.json({message: "get blog"}) });
-adminRouter.post("/blogs/:blogId", verifyToken, verifyAdmin, (req, res, next) => { return res.json({message: "edit blog"}) });
-adminRouter.put("/blogs/:blogId", verifyToken, verifyAdmin, (req, res, next) => { return res.json({message: "edit blog"}) });
-adminRouter.delete("/blogs/:blogId", verifyToken, verifyAdmin, (req, res, next) => { return res.json({message: "delete blog"}) });
+adminRouter.get("/blogs/:blogId", verifyToken, verifyAdmin, adminController.getBlogById);
+adminRouter.post("/blogs/:blogId", verifyToken, verifyAdmin, adminController.postBlogById);
+adminRouter.put("/blogs/:blogId", verifyToken, verifyAdmin, adminController.updateBlogById);
+adminRouter.delete("/blogs/:blogId", verifyToken, verifyAdmin, adminController.deleteBlogById);
 
-adminRouter.delete("/blogs/:blogId/comments/:commentId", verifyToken, verifyAdmin, (req, res, next) => { return res.json({message: "delete comment"}) });
+adminRouter.delete("/blogs/:blogId/comments/:commentId", verifyToken, verifyAdmin, adminController.deleteCommentById);
 
 module.exports = adminRouter;

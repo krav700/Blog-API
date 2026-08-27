@@ -5,13 +5,13 @@ const verifyToken = require('../lib/verifyToken.js')
 
 const clientBlogRouter = Router();
 
-clientBlogRouter.get("/", verifyToken, (req, res, next) => { return res.json({message: "get blogs"}) });
+clientBlogRouter.get("/", verifyToken, blogController.getBlogs);
 
-clientBlogRouter.get("/:blogId", verifyToken, (req, res, next) => { return res.json({message: "get one blog"}) });
+clientBlogRouter.get("/:blogId", verifyToken, blogController.getBlogById);
 
-clientBlogRouter.get("/:blogId/comments", verifyToken, (req, res, next) => { return res.json({message: "get comments"}) });
-clientBlogRouter.put("/:blogId/comments/:commentId", verifyToken, (req, res, next) => { return res.json({message: "edit your comment"}) });
-clientBlogRouter.post("/:blogId/comments/:commentId", verifyToken, (req, res, next) => { return res.json({message: "post a comment"}) });
-clientBlogRouter.delete("/:blogId/comments/:commentId", verifyToken, (req, res, next) => { return res.json({message: "delete your comment"}) });
+clientBlogRouter.get("/:blogId/comments", verifyToken, blogController.getBlogComments);
+clientBlogRouter.put("/:blogId/comments/:commentId", verifyToken, blogController.updateBlogComment );
+clientBlogRouter.post("/:blogId/comments/:commentId", verifyToken, blogController.postBlogComment);
+clientBlogRouter.delete("/:blogId/comments/:commentId", verifyToken, blogController.deleteBlogComment);
 
 module.exports = clientBlogRouter;
