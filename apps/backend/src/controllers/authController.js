@@ -115,8 +115,10 @@ const registerUser = [
         const {
             "first-name": firstName,
             "last-name": lastName,
+            email,
             username,
             password,
+            comments
         } = req.body;
 
         const errors = validationResult(req);
@@ -137,15 +139,27 @@ const registerUser = [
         const hash = saltHash.hash;
         const iterationCount = saltHash.iterationCount;
 
+        console.log(firstName)
+        console.log(lastName)
+        console.log(username)
+        console.log(hash)
+        console.log(salt)
+        console.log(iterationCount)
+        console.log(comments)
+
         try {
             await prisma.user.create({
                 data: {
-                    firstName: firstName,
-                    lastName: lastName,
-                    username: username,
-                    hash: hash,
-                    salt: salt,
-                    iterationCount: iterationCount,
+                    firstName,
+                    lastName,
+                    email,
+                    username,
+                    hash,
+                    salt,
+                    iterationCount,
+                    comments: {
+                        create: comments
+                    }
                 },
             });
             

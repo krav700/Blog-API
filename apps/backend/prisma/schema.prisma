@@ -6,7 +6,8 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../db/generated/prisma"
+  output   = "../src/db/generated/prisma"
+  previewFeatures = ["driverAdapters"]
 }
 
 datasource db {
@@ -16,7 +17,7 @@ datasource db {
 }
 
 model User {
-  id             String      @id @default(uuid()) @db.Uuid
+  id             String   @id @default(uuid()) @db.Uuid
   firstName      String   @db.VarChar(50)
   lastName       String   @db.VarChar(50)
   email          String   @unique
@@ -24,6 +25,7 @@ model User {
   hash           String
   salt           String
   iterationCount Int
+  comments Comment[]
 }
 
 model BlogPost {
@@ -32,8 +34,8 @@ model BlogPost {
   title String
   body String
 
-  createdAt DateTime @default(Date.now())
-  updatedAt DateTime @default(Date.now())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
 
   published Boolean
 }
@@ -41,10 +43,10 @@ model BlogPost {
 model Comment {
   id String @id @default(uuid()) @db.Uuid
 
-  authorId String
+  authorId String @db.Uuid
   authoredBy User @relation(fields: [authorId], references: [id])
   
-  createdAt DateTime @default(Date.now())
+  createdAt DateTime @default(now())
 }
 
 
