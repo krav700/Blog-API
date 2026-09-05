@@ -12,7 +12,7 @@ async function getAllUsers (req, res, next) {
         console.log(users);
         return res.json({ users });
     } catch (err) {
-        return res.json({ message: err });
+        return res.json({ message: err.message });
     }
 }
 
@@ -30,7 +30,7 @@ async function getUsersByPage (req, res, next) {
         console.log(users);
         return res.json({ users });
     } catch (err) {
-        return res.json({ message: err });
+        return res.json({ message: err.message });
     }
 }
 
@@ -49,7 +49,16 @@ async function getUserById (req, res, next) {
         console.log(user);
         return res.json({ user });
     } catch (err) {
-        return res.json({ message: err });
+        return res.json({ message: err.message });
+    }
+}
+
+async function getBlogs (req, res, next) {
+    try {
+        const blogs = await prisma.blogPost.findMany()
+        return res.json({ blogs });
+    } catch (err) {
+        return res.json({ message: err.message });
     }
 }
 
@@ -58,12 +67,11 @@ async function getBlogById (req, res, next) {
         const blog = await prisma.blogPost.findUnique({
             where: {
                 id: req.params.blogId
-            },
+            }
         })
-        console.log(blog);
         return res.json({ blog });
     } catch (err) {
-        return res.json({ message: err });
+        return res.json({ message: err.message });
     }
 }
 
@@ -78,7 +86,7 @@ async function postBlogById (req, res, next) {
         })
         return res.json({ message: "Blog post posted!" });
     } catch (err) {
-        return res.json({ message: err });
+        return res.json({ message: err.message });
     }
 }
 
@@ -96,7 +104,7 @@ async function updateBlogById (req, res, next) {
         })
         return res.json({ message: "Blog post updated!" });
     } catch (err) {
-        return res.json({ message: err });
+        return res.json({ message: err.message });
     }
 }
 
@@ -109,7 +117,7 @@ async function deleteBlogById (req, res, next) {
         })
         return res.json({ message: "Blog post deleted!" });
     } catch (err) {
-        return res.json({ message: err });
+        return res.json({ message: err.message });
     }
 }
 
@@ -122,7 +130,7 @@ async function deleteCommentById (req, res, next) {
         })
         return res.json({ message: "Comment deleted!" });
     } catch (err) {
-        return res.json({ message: err });
+        return res.json({ message: err.message });
     }
 }
 
@@ -130,6 +138,7 @@ module.exports = {
     getAllUsers,
     getUsersByPage,
     getUserById,
+    getBlogs,
     getBlogById,
     postBlogById,
     updateBlogById,
