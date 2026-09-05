@@ -11,7 +11,7 @@ clientBlogRouter.get("/:blogId", verifyToken, blogController.getBlogById);
 
 clientBlogRouter.get("/:blogId/comments", verifyToken, blogController.getBlogComments);
 clientBlogRouter.put("/:blogId/comments/:commentId", verifyToken, blogController.updateBlogComment );
-clientBlogRouter.post("/:blogId/comments/:commentId", verifyToken, blogController.postBlogComment);
+clientBlogRouter.post("/:blogId/comments", verifyToken, blogController.postBlogComment);
 clientBlogRouter.delete("/:blogId/comments/:commentId", verifyToken, blogController.deleteBlogComment);
 
 module.exports = clientBlogRouter;

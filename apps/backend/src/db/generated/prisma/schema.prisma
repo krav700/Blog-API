@@ -37,17 +37,24 @@ model BlogPost {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  published Boolean
+  published Boolean @default(false)
+
+  comments Comment[]
 }
 
 model Comment {
   id String @id @default(uuid()) @db.Uuid
+
+  content String
 
   authorId   String @db.Uuid
   authoredBy User   @relation(fields: [authorId], references: [id])
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  blogId String   @db.Uuid
+  blog   BlogPost @relation(fields: [blogId], references: [id], onDelete: Cascade)
 }
 
 model Session {

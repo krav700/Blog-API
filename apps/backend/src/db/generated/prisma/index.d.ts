@@ -1173,6 +1173,37 @@ export namespace Prisma {
 
 
   /**
+   * Count Type BlogPostCountOutputType
+   */
+
+  export type BlogPostCountOutputType = {
+    comments: number
+  }
+
+  export type BlogPostCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    comments?: boolean | BlogPostCountOutputTypeCountCommentsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * BlogPostCountOutputType without action
+   */
+  export type BlogPostCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogPostCountOutputType
+     */
+    select?: BlogPostCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * BlogPostCountOutputType without action
+   */
+  export type BlogPostCountOutputTypeCountCommentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CommentWhereInput
+  }
+
+
+  /**
    * Models
    */
 
@@ -2491,6 +2522,8 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     published?: boolean
+    comments?: boolean | BlogPost$commentsArgs<ExtArgs>
+    _count?: boolean | BlogPostCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["blogPost"]>
 
   export type BlogPostSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2521,10 +2554,18 @@ export namespace Prisma {
   }
 
   export type BlogPostOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "body" | "createdAt" | "updatedAt" | "published", ExtArgs["result"]["blogPost"]>
+  export type BlogPostInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    comments?: boolean | BlogPost$commentsArgs<ExtArgs>
+    _count?: boolean | BlogPostCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type BlogPostIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type BlogPostIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $BlogPostPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "BlogPost"
-    objects: {}
+    objects: {
+      comments: Prisma.$CommentPayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       title: string
@@ -2926,6 +2967,7 @@ export namespace Prisma {
    */
   export interface Prisma__BlogPostClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    comments<T extends BlogPost$commentsArgs<ExtArgs> = {}>(args?: Subset<T, BlogPost$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2978,6 +3020,10 @@ export namespace Prisma {
      */
     omit?: BlogPostOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogPostInclude<ExtArgs> | null
+    /**
      * Filter, which BlogPost to fetch.
      */
     where: BlogPostWhereUniqueInput
@@ -2996,6 +3042,10 @@ export namespace Prisma {
      */
     omit?: BlogPostOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogPostInclude<ExtArgs> | null
+    /**
      * Filter, which BlogPost to fetch.
      */
     where: BlogPostWhereUniqueInput
@@ -3013,6 +3063,10 @@ export namespace Prisma {
      * Omit specific fields from the BlogPost
      */
     omit?: BlogPostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogPostInclude<ExtArgs> | null
     /**
      * Filter, which BlogPost to fetch.
      */
@@ -3062,6 +3116,10 @@ export namespace Prisma {
      */
     omit?: BlogPostOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogPostInclude<ExtArgs> | null
+    /**
      * Filter, which BlogPost to fetch.
      */
     where?: BlogPostWhereInput
@@ -3110,6 +3168,10 @@ export namespace Prisma {
      */
     omit?: BlogPostOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogPostInclude<ExtArgs> | null
+    /**
      * Filter, which BlogPosts to fetch.
      */
     where?: BlogPostWhereInput
@@ -3152,6 +3214,10 @@ export namespace Prisma {
      * Omit specific fields from the BlogPost
      */
     omit?: BlogPostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogPostInclude<ExtArgs> | null
     /**
      * The data needed to create a BlogPost.
      */
@@ -3200,6 +3266,10 @@ export namespace Prisma {
      * Omit specific fields from the BlogPost
      */
     omit?: BlogPostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogPostInclude<ExtArgs> | null
     /**
      * The data needed to update a BlogPost.
      */
@@ -3267,6 +3337,10 @@ export namespace Prisma {
      */
     omit?: BlogPostOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogPostInclude<ExtArgs> | null
+    /**
      * The filter to search for the BlogPost to update in case it exists.
      */
     where: BlogPostWhereUniqueInput
@@ -3293,6 +3367,10 @@ export namespace Prisma {
      */
     omit?: BlogPostOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogPostInclude<ExtArgs> | null
+    /**
      * Filter which BlogPost to delete.
      */
     where: BlogPostWhereUniqueInput
@@ -3313,6 +3391,30 @@ export namespace Prisma {
   }
 
   /**
+   * BlogPost.comments
+   */
+  export type BlogPost$commentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Comment
+     */
+    select?: CommentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Comment
+     */
+    omit?: CommentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CommentInclude<ExtArgs> | null
+    where?: CommentWhereInput
+    orderBy?: CommentOrderByWithRelationInput | CommentOrderByWithRelationInput[]
+    cursor?: CommentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CommentScalarFieldEnum | CommentScalarFieldEnum[]
+  }
+
+  /**
    * BlogPost without action
    */
   export type BlogPostDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3324,6 +3426,10 @@ export namespace Prisma {
      * Omit specific fields from the BlogPost
      */
     omit?: BlogPostOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BlogPostInclude<ExtArgs> | null
   }
 
 
@@ -3339,46 +3445,58 @@ export namespace Prisma {
 
   export type CommentMinAggregateOutputType = {
     id: string | null
+    content: string | null
     authorId: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    blogId: string | null
   }
 
   export type CommentMaxAggregateOutputType = {
     id: string | null
+    content: string | null
     authorId: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    blogId: string | null
   }
 
   export type CommentCountAggregateOutputType = {
     id: number
+    content: number
     authorId: number
     createdAt: number
     updatedAt: number
+    blogId: number
     _all: number
   }
 
 
   export type CommentMinAggregateInputType = {
     id?: true
+    content?: true
     authorId?: true
     createdAt?: true
     updatedAt?: true
+    blogId?: true
   }
 
   export type CommentMaxAggregateInputType = {
     id?: true
+    content?: true
     authorId?: true
     createdAt?: true
     updatedAt?: true
+    blogId?: true
   }
 
   export type CommentCountAggregateInputType = {
     id?: true
+    content?: true
     authorId?: true
     createdAt?: true
     updatedAt?: true
+    blogId?: true
     _all?: true
   }
 
@@ -3456,9 +3574,11 @@ export namespace Prisma {
 
   export type CommentGroupByOutputType = {
     id: string
+    content: string
     authorId: string
     createdAt: Date
     updatedAt: Date
+    blogId: string
     _count: CommentCountAggregateOutputType | null
     _min: CommentMinAggregateOutputType | null
     _max: CommentMaxAggregateOutputType | null
@@ -3480,56 +3600,73 @@ export namespace Prisma {
 
   export type CommentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    content?: boolean
     authorId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    blogId?: boolean
     authoredBy?: boolean | UserDefaultArgs<ExtArgs>
+    blog?: boolean | BlogPostDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["comment"]>
 
   export type CommentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    content?: boolean
     authorId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    blogId?: boolean
     authoredBy?: boolean | UserDefaultArgs<ExtArgs>
+    blog?: boolean | BlogPostDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["comment"]>
 
   export type CommentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    content?: boolean
     authorId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    blogId?: boolean
     authoredBy?: boolean | UserDefaultArgs<ExtArgs>
+    blog?: boolean | BlogPostDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["comment"]>
 
   export type CommentSelectScalar = {
     id?: boolean
+    content?: boolean
     authorId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    blogId?: boolean
   }
 
-  export type CommentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "authorId" | "createdAt" | "updatedAt", ExtArgs["result"]["comment"]>
+  export type CommentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "content" | "authorId" | "createdAt" | "updatedAt" | "blogId", ExtArgs["result"]["comment"]>
   export type CommentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     authoredBy?: boolean | UserDefaultArgs<ExtArgs>
+    blog?: boolean | BlogPostDefaultArgs<ExtArgs>
   }
   export type CommentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     authoredBy?: boolean | UserDefaultArgs<ExtArgs>
+    blog?: boolean | BlogPostDefaultArgs<ExtArgs>
   }
   export type CommentIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     authoredBy?: boolean | UserDefaultArgs<ExtArgs>
+    blog?: boolean | BlogPostDefaultArgs<ExtArgs>
   }
 
   export type $CommentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Comment"
     objects: {
       authoredBy: Prisma.$UserPayload<ExtArgs>
+      blog: Prisma.$BlogPostPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
+      content: string
       authorId: string
       createdAt: Date
       updatedAt: Date
+      blogId: string
     }, ExtArgs["result"]["comment"]>
     composites: {}
   }
@@ -3925,6 +4062,7 @@ export namespace Prisma {
   export interface Prisma__CommentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     authoredBy<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    blog<T extends BlogPostDefaultArgs<ExtArgs> = {}>(args?: Subset<T, BlogPostDefaultArgs<ExtArgs>>): Prisma__BlogPostClient<$Result.GetResult<Prisma.$BlogPostPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3955,9 +4093,11 @@ export namespace Prisma {
    */
   interface CommentFieldRefs {
     readonly id: FieldRef<"Comment", 'String'>
+    readonly content: FieldRef<"Comment", 'String'>
     readonly authorId: FieldRef<"Comment", 'String'>
     readonly createdAt: FieldRef<"Comment", 'DateTime'>
     readonly updatedAt: FieldRef<"Comment", 'DateTime'>
+    readonly blogId: FieldRef<"Comment", 'String'>
   }
     
 
@@ -5396,9 +5536,11 @@ export namespace Prisma {
 
   export const CommentScalarFieldEnum: {
     id: 'id',
+    content: 'content',
     authorId: 'authorId',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    blogId: 'blogId'
   };
 
   export type CommentScalarFieldEnum = (typeof CommentScalarFieldEnum)[keyof typeof CommentScalarFieldEnum]
@@ -5583,6 +5725,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"BlogPost"> | Date | string
     updatedAt?: DateTimeFilter<"BlogPost"> | Date | string
     published?: BoolFilter<"BlogPost"> | boolean
+    comments?: CommentListRelationFilter
   }
 
   export type BlogPostOrderByWithRelationInput = {
@@ -5592,6 +5735,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     published?: SortOrder
+    comments?: CommentOrderByRelationAggregateInput
   }
 
   export type BlogPostWhereUniqueInput = Prisma.AtLeast<{
@@ -5604,6 +5748,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"BlogPost"> | Date | string
     updatedAt?: DateTimeFilter<"BlogPost"> | Date | string
     published?: BoolFilter<"BlogPost"> | boolean
+    comments?: CommentListRelationFilter
   }, "id">
 
   export type BlogPostOrderByWithAggregationInput = {
@@ -5635,18 +5780,24 @@ export namespace Prisma {
     OR?: CommentWhereInput[]
     NOT?: CommentWhereInput | CommentWhereInput[]
     id?: UuidFilter<"Comment"> | string
+    content?: StringFilter<"Comment"> | string
     authorId?: UuidFilter<"Comment"> | string
     createdAt?: DateTimeFilter<"Comment"> | Date | string
     updatedAt?: DateTimeFilter<"Comment"> | Date | string
+    blogId?: UuidFilter<"Comment"> | string
     authoredBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+    blog?: XOR<BlogPostScalarRelationFilter, BlogPostWhereInput>
   }
 
   export type CommentOrderByWithRelationInput = {
     id?: SortOrder
+    content?: SortOrder
     authorId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    blogId?: SortOrder
     authoredBy?: UserOrderByWithRelationInput
+    blog?: BlogPostOrderByWithRelationInput
   }
 
   export type CommentWhereUniqueInput = Prisma.AtLeast<{
@@ -5654,17 +5805,22 @@ export namespace Prisma {
     AND?: CommentWhereInput | CommentWhereInput[]
     OR?: CommentWhereInput[]
     NOT?: CommentWhereInput | CommentWhereInput[]
+    content?: StringFilter<"Comment"> | string
     authorId?: UuidFilter<"Comment"> | string
     createdAt?: DateTimeFilter<"Comment"> | Date | string
     updatedAt?: DateTimeFilter<"Comment"> | Date | string
+    blogId?: UuidFilter<"Comment"> | string
     authoredBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+    blog?: XOR<BlogPostScalarRelationFilter, BlogPostWhereInput>
   }, "id">
 
   export type CommentOrderByWithAggregationInput = {
     id?: SortOrder
+    content?: SortOrder
     authorId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    blogId?: SortOrder
     _count?: CommentCountOrderByAggregateInput
     _max?: CommentMaxOrderByAggregateInput
     _min?: CommentMinOrderByAggregateInput
@@ -5675,9 +5831,11 @@ export namespace Prisma {
     OR?: CommentScalarWhereWithAggregatesInput[]
     NOT?: CommentScalarWhereWithAggregatesInput | CommentScalarWhereWithAggregatesInput[]
     id?: UuidWithAggregatesFilter<"Comment"> | string
+    content?: StringWithAggregatesFilter<"Comment"> | string
     authorId?: UuidWithAggregatesFilter<"Comment"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Comment"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Comment"> | Date | string
+    blogId?: UuidWithAggregatesFilter<"Comment"> | string
   }
 
   export type SessionWhereInput = {
@@ -5814,7 +5972,8 @@ export namespace Prisma {
     body: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    published: boolean
+    published?: boolean
+    comments?: CommentCreateNestedManyWithoutBlogInput
   }
 
   export type BlogPostUncheckedCreateInput = {
@@ -5823,7 +5982,8 @@ export namespace Prisma {
     body: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    published: boolean
+    published?: boolean
+    comments?: CommentUncheckedCreateNestedManyWithoutBlogInput
   }
 
   export type BlogPostUpdateInput = {
@@ -5833,6 +5993,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     published?: BoolFieldUpdateOperationsInput | boolean
+    comments?: CommentUpdateManyWithoutBlogNestedInput
   }
 
   export type BlogPostUncheckedUpdateInput = {
@@ -5842,6 +6003,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     published?: BoolFieldUpdateOperationsInput | boolean
+    comments?: CommentUncheckedUpdateManyWithoutBlogNestedInput
   }
 
   export type BlogPostCreateManyInput = {
@@ -5850,7 +6012,7 @@ export namespace Prisma {
     body: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    published: boolean
+    published?: boolean
   }
 
   export type BlogPostUpdateManyMutationInput = {
@@ -5873,50 +6035,63 @@ export namespace Prisma {
 
   export type CommentCreateInput = {
     id?: string
+    content: string
     createdAt?: Date | string
     updatedAt?: Date | string
     authoredBy: UserCreateNestedOneWithoutCommentsInput
+    blog: BlogPostCreateNestedOneWithoutCommentsInput
   }
 
   export type CommentUncheckedCreateInput = {
     id?: string
+    content: string
     authorId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    blogId: string
   }
 
   export type CommentUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     authoredBy?: UserUpdateOneRequiredWithoutCommentsNestedInput
+    blog?: BlogPostUpdateOneRequiredWithoutCommentsNestedInput
   }
 
   export type CommentUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
     authorId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    blogId?: StringFieldUpdateOperationsInput | string
   }
 
   export type CommentCreateManyInput = {
     id?: string
+    content: string
     authorId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    blogId: string
   }
 
   export type CommentUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CommentUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
     authorId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    blogId?: StringFieldUpdateOperationsInput | string
   }
 
   export type SessionCreateInput = {
@@ -6176,25 +6351,36 @@ export namespace Prisma {
     isNot?: UserWhereInput
   }
 
+  export type BlogPostScalarRelationFilter = {
+    is?: BlogPostWhereInput
+    isNot?: BlogPostWhereInput
+  }
+
   export type CommentCountOrderByAggregateInput = {
     id?: SortOrder
+    content?: SortOrder
     authorId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    blogId?: SortOrder
   }
 
   export type CommentMaxOrderByAggregateInput = {
     id?: SortOrder
+    content?: SortOrder
     authorId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    blogId?: SortOrder
   }
 
   export type CommentMinOrderByAggregateInput = {
     id?: SortOrder
+    content?: SortOrder
     authorId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    blogId?: SortOrder
   }
 
   export type SessionCountOrderByAggregateInput = {
@@ -6272,6 +6458,20 @@ export namespace Prisma {
     deleteMany?: CommentScalarWhereInput | CommentScalarWhereInput[]
   }
 
+  export type CommentCreateNestedManyWithoutBlogInput = {
+    create?: XOR<CommentCreateWithoutBlogInput, CommentUncheckedCreateWithoutBlogInput> | CommentCreateWithoutBlogInput[] | CommentUncheckedCreateWithoutBlogInput[]
+    connectOrCreate?: CommentCreateOrConnectWithoutBlogInput | CommentCreateOrConnectWithoutBlogInput[]
+    createMany?: CommentCreateManyBlogInputEnvelope
+    connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+  }
+
+  export type CommentUncheckedCreateNestedManyWithoutBlogInput = {
+    create?: XOR<CommentCreateWithoutBlogInput, CommentUncheckedCreateWithoutBlogInput> | CommentCreateWithoutBlogInput[] | CommentUncheckedCreateWithoutBlogInput[]
+    connectOrCreate?: CommentCreateOrConnectWithoutBlogInput | CommentCreateOrConnectWithoutBlogInput[]
+    createMany?: CommentCreateManyBlogInputEnvelope
+    connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+  }
+
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
   }
@@ -6280,10 +6480,44 @@ export namespace Prisma {
     set?: boolean
   }
 
+  export type CommentUpdateManyWithoutBlogNestedInput = {
+    create?: XOR<CommentCreateWithoutBlogInput, CommentUncheckedCreateWithoutBlogInput> | CommentCreateWithoutBlogInput[] | CommentUncheckedCreateWithoutBlogInput[]
+    connectOrCreate?: CommentCreateOrConnectWithoutBlogInput | CommentCreateOrConnectWithoutBlogInput[]
+    upsert?: CommentUpsertWithWhereUniqueWithoutBlogInput | CommentUpsertWithWhereUniqueWithoutBlogInput[]
+    createMany?: CommentCreateManyBlogInputEnvelope
+    set?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    disconnect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    delete?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    update?: CommentUpdateWithWhereUniqueWithoutBlogInput | CommentUpdateWithWhereUniqueWithoutBlogInput[]
+    updateMany?: CommentUpdateManyWithWhereWithoutBlogInput | CommentUpdateManyWithWhereWithoutBlogInput[]
+    deleteMany?: CommentScalarWhereInput | CommentScalarWhereInput[]
+  }
+
+  export type CommentUncheckedUpdateManyWithoutBlogNestedInput = {
+    create?: XOR<CommentCreateWithoutBlogInput, CommentUncheckedCreateWithoutBlogInput> | CommentCreateWithoutBlogInput[] | CommentUncheckedCreateWithoutBlogInput[]
+    connectOrCreate?: CommentCreateOrConnectWithoutBlogInput | CommentCreateOrConnectWithoutBlogInput[]
+    upsert?: CommentUpsertWithWhereUniqueWithoutBlogInput | CommentUpsertWithWhereUniqueWithoutBlogInput[]
+    createMany?: CommentCreateManyBlogInputEnvelope
+    set?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    disconnect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    delete?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    connect?: CommentWhereUniqueInput | CommentWhereUniqueInput[]
+    update?: CommentUpdateWithWhereUniqueWithoutBlogInput | CommentUpdateWithWhereUniqueWithoutBlogInput[]
+    updateMany?: CommentUpdateManyWithWhereWithoutBlogInput | CommentUpdateManyWithWhereWithoutBlogInput[]
+    deleteMany?: CommentScalarWhereInput | CommentScalarWhereInput[]
+  }
+
   export type UserCreateNestedOneWithoutCommentsInput = {
     create?: XOR<UserCreateWithoutCommentsInput, UserUncheckedCreateWithoutCommentsInput>
     connectOrCreate?: UserCreateOrConnectWithoutCommentsInput
     connect?: UserWhereUniqueInput
+  }
+
+  export type BlogPostCreateNestedOneWithoutCommentsInput = {
+    create?: XOR<BlogPostCreateWithoutCommentsInput, BlogPostUncheckedCreateWithoutCommentsInput>
+    connectOrCreate?: BlogPostCreateOrConnectWithoutCommentsInput
+    connect?: BlogPostWhereUniqueInput
   }
 
   export type UserUpdateOneRequiredWithoutCommentsNestedInput = {
@@ -6292,6 +6526,14 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutCommentsInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCommentsInput, UserUpdateWithoutCommentsInput>, UserUncheckedUpdateWithoutCommentsInput>
+  }
+
+  export type BlogPostUpdateOneRequiredWithoutCommentsNestedInput = {
+    create?: XOR<BlogPostCreateWithoutCommentsInput, BlogPostUncheckedCreateWithoutCommentsInput>
+    connectOrCreate?: BlogPostCreateOrConnectWithoutCommentsInput
+    upsert?: BlogPostUpsertWithoutCommentsInput
+    connect?: BlogPostWhereUniqueInput
+    update?: XOR<XOR<BlogPostUpdateToOneWithWhereWithoutCommentsInput, BlogPostUpdateWithoutCommentsInput>, BlogPostUncheckedUpdateWithoutCommentsInput>
   }
 
   export type NestedUuidFilter<$PrismaModel = never> = {
@@ -6428,14 +6670,18 @@ export namespace Prisma {
 
   export type CommentCreateWithoutAuthoredByInput = {
     id?: string
+    content: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    blog: BlogPostCreateNestedOneWithoutCommentsInput
   }
 
   export type CommentUncheckedCreateWithoutAuthoredByInput = {
     id?: string
+    content: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    blogId: string
   }
 
   export type CommentCreateOrConnectWithoutAuthoredByInput = {
@@ -6469,9 +6715,53 @@ export namespace Prisma {
     OR?: CommentScalarWhereInput[]
     NOT?: CommentScalarWhereInput | CommentScalarWhereInput[]
     id?: UuidFilter<"Comment"> | string
+    content?: StringFilter<"Comment"> | string
     authorId?: UuidFilter<"Comment"> | string
     createdAt?: DateTimeFilter<"Comment"> | Date | string
     updatedAt?: DateTimeFilter<"Comment"> | Date | string
+    blogId?: UuidFilter<"Comment"> | string
+  }
+
+  export type CommentCreateWithoutBlogInput = {
+    id?: string
+    content: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    authoredBy: UserCreateNestedOneWithoutCommentsInput
+  }
+
+  export type CommentUncheckedCreateWithoutBlogInput = {
+    id?: string
+    content: string
+    authorId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CommentCreateOrConnectWithoutBlogInput = {
+    where: CommentWhereUniqueInput
+    create: XOR<CommentCreateWithoutBlogInput, CommentUncheckedCreateWithoutBlogInput>
+  }
+
+  export type CommentCreateManyBlogInputEnvelope = {
+    data: CommentCreateManyBlogInput | CommentCreateManyBlogInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type CommentUpsertWithWhereUniqueWithoutBlogInput = {
+    where: CommentWhereUniqueInput
+    update: XOR<CommentUpdateWithoutBlogInput, CommentUncheckedUpdateWithoutBlogInput>
+    create: XOR<CommentCreateWithoutBlogInput, CommentUncheckedCreateWithoutBlogInput>
+  }
+
+  export type CommentUpdateWithWhereUniqueWithoutBlogInput = {
+    where: CommentWhereUniqueInput
+    data: XOR<CommentUpdateWithoutBlogInput, CommentUncheckedUpdateWithoutBlogInput>
+  }
+
+  export type CommentUpdateManyWithWhereWithoutBlogInput = {
+    where: CommentScalarWhereInput
+    data: XOR<CommentUpdateManyMutationInput, CommentUncheckedUpdateManyWithoutBlogInput>
   }
 
   export type UserCreateWithoutCommentsInput = {
@@ -6499,6 +6789,29 @@ export namespace Prisma {
   export type UserCreateOrConnectWithoutCommentsInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutCommentsInput, UserUncheckedCreateWithoutCommentsInput>
+  }
+
+  export type BlogPostCreateWithoutCommentsInput = {
+    id?: string
+    title: string
+    body: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    published?: boolean
+  }
+
+  export type BlogPostUncheckedCreateWithoutCommentsInput = {
+    id?: string
+    title: string
+    body: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    published?: boolean
+  }
+
+  export type BlogPostCreateOrConnectWithoutCommentsInput = {
+    where: BlogPostWhereUniqueInput
+    create: XOR<BlogPostCreateWithoutCommentsInput, BlogPostUncheckedCreateWithoutCommentsInput>
   }
 
   export type UserUpsertWithoutCommentsInput = {
@@ -6534,26 +6847,95 @@ export namespace Prisma {
     iterationCount?: IntFieldUpdateOperationsInput | number
   }
 
+  export type BlogPostUpsertWithoutCommentsInput = {
+    update: XOR<BlogPostUpdateWithoutCommentsInput, BlogPostUncheckedUpdateWithoutCommentsInput>
+    create: XOR<BlogPostCreateWithoutCommentsInput, BlogPostUncheckedCreateWithoutCommentsInput>
+    where?: BlogPostWhereInput
+  }
+
+  export type BlogPostUpdateToOneWithWhereWithoutCommentsInput = {
+    where?: BlogPostWhereInput
+    data: XOR<BlogPostUpdateWithoutCommentsInput, BlogPostUncheckedUpdateWithoutCommentsInput>
+  }
+
+  export type BlogPostUpdateWithoutCommentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    published?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type BlogPostUncheckedUpdateWithoutCommentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    body?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    published?: BoolFieldUpdateOperationsInput | boolean
+  }
+
   export type CommentCreateManyAuthoredByInput = {
     id?: string
+    content: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    blogId: string
   }
 
   export type CommentUpdateWithoutAuthoredByInput = {
     id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    blog?: BlogPostUpdateOneRequiredWithoutCommentsNestedInput
   }
 
   export type CommentUncheckedUpdateWithoutAuthoredByInput = {
     id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    blogId?: StringFieldUpdateOperationsInput | string
   }
 
   export type CommentUncheckedUpdateManyWithoutAuthoredByInput = {
     id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    blogId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type CommentCreateManyBlogInput = {
+    id?: string
+    content: string
+    authorId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CommentUpdateWithoutBlogInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    authoredBy?: UserUpdateOneRequiredWithoutCommentsNestedInput
+  }
+
+  export type CommentUncheckedUpdateWithoutBlogInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    authorId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type CommentUncheckedUpdateManyWithoutBlogInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    authorId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
