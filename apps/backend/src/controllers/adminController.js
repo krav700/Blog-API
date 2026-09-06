@@ -46,7 +46,6 @@ async function getUserById (req, res, next) {
                 iterationCount: true
             }
         })
-        console.log(user);
         return res.json({ user });
     } catch (err) {
         return res.json({ message: err.message });

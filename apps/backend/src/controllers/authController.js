@@ -68,8 +68,7 @@ const validateRegister = [
 ];
 
 function getLoginForm(req, res, next) {
-    // res.render("forms/login", { title: "Login" });
-    res.json({message: "this is a login form"})
+    return res.json({message: "this is a login form"})
 }
 
 const loginUser = [
@@ -83,7 +82,7 @@ const loginUser = [
 
             if (!user) {
                 console.log(info?.message || "Authentication failed");
-                return res.redirect("/auth/login");
+                return res.json({ message: info?.message || "Authentication failed", href: "/auth/login" });
             }
 
             req.login(user, (err) => {
@@ -105,7 +104,7 @@ const loginUser = [
 
 function getRegisterForm(req, res, next) {
     // res.render("forms/register", { title: "Register" });
-    res.json({message: "this is a register form"})
+    return res.json({message: "this is a register form"})
 }
 
 const registerUser = [
@@ -163,8 +162,7 @@ const registerUser = [
                 },
             });
             
-            return res.json({message: "Register successful"});
-            res.redirect("/auth/login");
+            return res.json({message: "Register successful", href: "/auth/login"});
         } catch (err) {
             next(err);
         }
@@ -177,7 +175,7 @@ function logoutUser(req, res, next) {
             console.log(err);
             return next(err);
         }
-        res.redirect("/");
+        return res.json({message: "User Logged Out", href: "/"});
     });
 }
 
