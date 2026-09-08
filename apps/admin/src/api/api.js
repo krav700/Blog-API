@@ -7,7 +7,14 @@ async function fetchApi(path, methodType, bodyParams) {
             },
             ...(bodyParams && { body: JSON.stringify(bodyParams) }),
         });
-        const data = await response.json();
+
+        const data = response.json();
+
+        if (!response.ok) {
+            throw new Error(
+                data.message || `Request failed: ${response.status}`,
+            );
+        }
 
         return data;
     } catch (err) {

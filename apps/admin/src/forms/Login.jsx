@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import fetchApi from '../api/api.js'
 
 function Login() {
   const [username, setUsername] = useState('');
@@ -7,28 +8,20 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      const response = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          username,
-          password,
-        }),
-      })
-      console.log(response)
-      const data = await response.json();
-      
-      console.log(data);
-      
-      localStorage.setItem('token', data.token);
-      return window.location.href = "/";
-    } catch (err) {
-      console.log(err);
-      return;
-    }
+      try {
+
+        const data = await fetchApi('/api/auth/login', 'POST', {username, password})
+        
+        if (!data) {
+          console.log('No data recieved: ', data);
+          return;
+        }
+        
+        localStorage.setItem('token', data.token);
+        window.location.href = "/";
+      } catch (err) {
+        console.log('Login failed:', err)
+      }
   }
 
   return (
