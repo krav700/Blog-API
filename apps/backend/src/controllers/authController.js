@@ -2,8 +2,7 @@ const { body, validationResult, matchedData } = require("express-validator");
 const passwordUtils = require("../lib/passwordUtils.js");
 const { prisma } = require("../lib/prisma.js");
 const passport = require("passport");
-const jwt = require('jsonwebtoken');
-const verifyToken = require('../lib/verifyToken.js')
+const jwt = require("jsonwebtoken");
 
 const emptyErr = "must not be empty.";
 const lengthErr = "must be between 3 and 50 characters.";
@@ -24,13 +23,13 @@ const validateLogin = [
 ];
 
 const validateRegister = [
-    body("first-name")
+    body("firstName")
         .trim()
         .notEmpty()
         .withMessage(`First Name ${emptyErr}`)
         .isLength({ min: 3, max: 50 })
         .withMessage(`First Name ${lengthErr}`),
-    body("last-name")
+    body("lastName")
         .trim()
         .notEmpty()
         .withMessage(`Last Name ${emptyErr}`)
@@ -60,7 +59,7 @@ const validateRegister = [
         .withMessage(`Password ${emptyErr}`)
         .isLength({ min: 8 })
         .withMessage(`Password should be minimum 8 characters.`),
-    body("confirm-password")
+    body("confirmPassword")
         .custom((value, { req }) => {
             return value === req.body.password;
         })
@@ -68,7 +67,7 @@ const validateRegister = [
 ];
 
 function getLoginForm(req, res, next) {
-    return res.json({message: "this is a login form"})
+    return res.json({ message: "this is a login form" });
 }
 
 const loginUser = [
@@ -82,7 +81,10 @@ const loginUser = [
 
             if (!user) {
                 console.log(info?.message || "Authentication failed");
-                return res.json({ message: info?.message || "Authentication failed", href: "/auth/login" });
+                return res.json({
+                    message: info?.message || "Authentication failed",
+                    href: "/auth/login",
+                });
             }
 
             req.login(user, (err) => {
@@ -91,12 +93,17 @@ const loginUser = [
                     return next(err);
                 }
 
-                jwt.sign({user}, process.env.JWT_SECRET_KEY, { expiresIn: '2d' } ,(err, token) => {
-                    return res.json({
-                        message: 'Login successful',
-                        token
-                    })
-                });
+                jwt.sign(
+                    { user },
+                    process.env.JWT_SECRET_KEY,
+                    { expiresIn: "2d" },
+                    (err, token) => {
+                        return res.json({
+                            message: "Login successful",
+                            token,
+                        });
+                    },
+                );
             });
         })(req, res, next);
     },
@@ -104,32 +111,23 @@ const loginUser = [
 
 function getRegisterForm(req, res, next) {
     // res.render("forms/register", { title: "Register" });
-    return res.json({message: "this is a register form"})
+    return res.json({ message: "this is a register form" });
 }
 
 const registerUser = [
     validateRegister,
     async (req, res, next) => {
-        console.log(req.body)
-        const {
-            "first-name": firstName,
-            "last-name": lastName,
-            email,
-            username,
-            password,
-            comments
-        } = req.body;
+        const { firstName, lastName, email, username, password } = req.body;
 
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.json({message: errors.array()})
-            // return res.status(400).render("forms/register", {
-            //     title: "Register",
-            //     errors: errors.array(),
-            //     firstName,
-            //     lastName,
-            //     username,
-            // });
+            return res.status(400).json({
+                title: "Register",
+                errors: errors.array(),
+                firstName,
+                lastName,
+                username,
+            });
         }
 
         const saltHash = passwordUtils.genPassword(password);
@@ -137,14 +135,6 @@ const registerUser = [
         const salt = saltHash.salt;
         const hash = saltHash.hash;
         const iterationCount = saltHash.iterationCount;
-
-        console.log(firstName)
-        console.log(lastName)
-        console.log(username)
-        console.log(hash)
-        console.log(salt)
-        console.log(iterationCount)
-        console.log(comments)
 
         try {
             await prisma.user.create({
@@ -156,13 +146,13 @@ const registerUser = [
                     hash,
                     salt,
                     iterationCount,
-                    comments: {
-                        create: comments
-                    }
                 },
             });
-            
-            return res.json({message: "Register successful", href: "/auth/login"});
+
+            return res.json({
+                message: "Register successful",
+                href: "/auth/login",
+            });
         } catch (err) {
             next(err);
         }
@@ -175,7 +165,7 @@ function logoutUser(req, res, next) {
             console.log(err);
             return next(err);
         }
-        return res.json({message: "User Logged Out", href: "/"});
+        return res.json({ message: "User Logged Out", href: "/" });
     });
 }
 
