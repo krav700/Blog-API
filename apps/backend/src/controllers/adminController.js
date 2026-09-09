@@ -79,7 +79,7 @@ async function postBlogById (req, res, next) {
         await prisma.blogPost.create({
             data: {
                 title: req.body.title,
-                body: req.body.body,
+                content: req.body.content,
                 published: req.body.published
             }
         })
@@ -94,7 +94,7 @@ async function updateBlogById (req, res, next) {
         await prisma.blogPost.update({
             data: {
                 title: req.body.title,
-                body: req.body.body,
+                content: req.body.content,
                 published: req.body.published
             },
             where: {

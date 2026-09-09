@@ -46,7 +46,7 @@ async function updateBlogComment (req, res, next) {
     try {
         await prisma.comment.update({
             data: {
-                body: req.body.body
+                content: req.body.content
             },
             where: {
                 id: req.params.content

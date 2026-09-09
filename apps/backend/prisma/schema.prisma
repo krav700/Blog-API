@@ -32,7 +32,7 @@ model BlogPost {
   id String @id @default(uuid()) @db.Uuid
   
   title String
-  body String
+  content String
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
