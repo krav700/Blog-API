@@ -2,7 +2,8 @@ import App from "../App";
 import Login from "../forms/Login"
 import PageNotFound from "../errors/PageNotFound";
 import Register from "../forms/Register";
-import EditBlog from "../editBlog";
+import Blogs from "../Blogs";
+import EditBlog from "../EditBlog";
 
 const routes = [
   {
@@ -19,9 +20,17 @@ const routes = [
     element: <Register />
   },
   {
-    path: "admin/blogs/:blogId",
+    path: "admin/blogs",
+    element: <Blogs />
+  },
+  {
+    path: "admin/blogs/create",
     element: <EditBlog />
-  }
+  },
+  {
+    path: "admin/blogs/:blogId",
+    element: <EditBlog  />
+  },
 ];
 
 export default routes;

@@ -4,9 +4,14 @@ async function fetchApi(path, methodType, bodyParams) {
             method: methodType,
             headers: {
                 "Content-Type": "application/json",
+                "authorization": localStorage.getItem("token")
             },
             ...(bodyParams && { body: JSON.stringify(bodyParams) }),
         });
+
+        if (response.status === 403) {
+            window.location.href = "/auth/login"
+        }
 
         const data = await response.json();
         if (!response.ok) {
@@ -19,6 +24,7 @@ async function fetchApi(path, methodType, bodyParams) {
         return data;
     } catch (err) {
         console.log(err);
+        console.log("yo")
         throw err;
     }
 }
