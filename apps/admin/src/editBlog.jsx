@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import "./App.css";
 import { Editor } from "@tinymce/tinymce-react";
 import fetchApi from "./api/api";
 import { useParams } from "react-router-dom";
@@ -19,7 +18,6 @@ function EditBlog() {
                     `/api/admin/blogs/${params.blogId}`,
                     "GET",
                 );
-                console.log(response.blog);
                 const blogData = response.blog;
                 setTitle(blogData.title);
                 setPublished(blogData.published);
