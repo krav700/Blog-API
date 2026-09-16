@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Editor } from "@tinymce/tinymce-react";
-import fetchApi from "./api/api";
+import fetchApi from "../api/api";
 import { useParams } from "react-router-dom";
 
 function EditBlog() {

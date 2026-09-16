@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import fetchApi from "./api/api";
+import fetchApi from "../api/api";
 import { Link } from 'react-router';
 
 function Blogs() {
@@ -27,7 +27,7 @@ function Blogs() {
         <div className="p-4">
             <div className="grid grid-cols-3 items-end">
                 <h1 className="text-4xl sm:text-5xl col-start-2">Blogs</h1>
-                <Link to={'/admin/blogs/create'} className="text-xs sm:text-base col-start-3">
+                <Link to={'/admin/blogs/create'} className="text-xs sm:text-base col-start-3" viewTransition>
                     Create Blog
                 </Link>
             </div>
@@ -42,8 +42,8 @@ function Blogs() {
                         </div>
                     </div>
                 {blogs.length !== 0 && blogs.map((blog) => (
-                    <Link to={`/admin/blogs/${blog.id}`} className="border w-full p-5">
-                        <div className="grid grid-cols-[2fr_2fr_1fr] justify-start items-start gap-4 max-h-5 min-w-0 overflow-hidden" key={blog.id}>
+                    <Link to={`/admin/blogs/${blog.id}`} className="border w-full p-5" key={blog.id} viewTransition>
+                        <div className="grid grid-cols-[2fr_2fr_1fr] justify-start items-start gap-4 max-h-5 min-w-0 overflow-hidden">
                             <h2 className="text-sm sm:text-base min-w-0 text-ellipsis text-start whitespace-nowrap overflow-hidden max-h-5">{blog.title}</h2>
 
                             <h3 className="text-xs sm:text-sm min-w-0 text-ellipsis text-start whitespace-nowrap overflow-hidden max-h-5">{strip(blog.content)}</h3>
