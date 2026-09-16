@@ -25,7 +25,9 @@ function EditBlog() {
                 editorRef.current = blogData.content;
             } catch (err) {
                 console.log(err);
-                setError(() => { throw new Error('Blog post does not exist') })
+                setError(() => {
+                    throw new Error("Blog post does not exist");
+                });
                 throw err;
             }
         }
@@ -61,11 +63,17 @@ function EditBlog() {
 
     const deleteBlogPost = async () => {
         if (window.confirm("Are you sure you want to delete this blog post?")) {
-
+            try {
+                await fetchApi(`/api/admin/blogs/${params.blogId}`, "DELETE");
+                return (window.location.href = "/admin/blogs");
+            } catch (err) {
+                console.log(err);
+                throw err;
+            }
         } else {
             return;
         }
-    }
+    };
 
     return (
         <div className="flex flex-col gap-3 p-5">
@@ -147,7 +155,20 @@ function EditBlog() {
                         "body { font-family:Helvetica,Arial,sans-serif; font-size:14px } p, h1, h2, h3, h4, h5, h6 { margin: 0 }",
                 }}
             />
-            <button onClick={saveChanges} className="bg-green-900 text-white rounded-lg">Save Changes</button>
+            <button
+                onClick={saveChanges}
+                className="bg-green-900 text-white rounded-lg"
+            >
+                Save Changes
+            </button>
+            {params.blogId ? (
+                <button
+                    onClick={deleteBlogPost}
+                    className="bg-red-900 text-white rounded-lg"
+                >
+                    Delete Blog Post
+                </button>
+            ) : null}
         </div>
     );
 }
