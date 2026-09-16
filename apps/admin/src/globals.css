@@ -163,3 +163,37 @@ p {
 #__next {
     isolation: isolate;
 }
+
+@media (prefers-reduced-motion: no-preference) {
+    @view-transition {
+        navigation: auto;
+    }
+
+    ::view-transition-group(page-content) {
+        animation-duration: 0.75s;
+    }
+
+    ::view-transition-old(page-content) {
+        animation-name: slide-out;
+    }
+
+    ::view-transition-new(page-content) {
+        animation-name: slide-in;
+    }
+
+    main {
+        view-transition-name: page-content;
+    }
+
+    @keyframes slide-out {
+        to {
+            translate: -100vw;
+        }
+    }
+
+    @keyframes slide-in {
+        from {
+            translate: 100vw;
+        }
+    }
+}
