@@ -6,6 +6,8 @@ import { useParams } from "react-router-dom";
 function EditBlog() {
     const [title, setTitle] = useState("");
     const [published, setPublished] = useState(false);
+    const [comments, setComments] = useState([]);
+    const [commentPage, setCommentPage] = useState(0);
     const [isBeingEdited, setIsBeingEdited] = useState(false);
     const [, setError] = useState(null);
     const tinyMCAPIKey = import.meta.env.VITE_TINYMC_API_KEY;
@@ -22,6 +24,7 @@ function EditBlog() {
                 const blogData = response.blog;
                 setTitle(blogData.title);
                 setPublished(blogData.published);
+                setComments(blogData.comments);
                 editorRef.current = blogData.content;
             } catch (err) {
                 console.log(err);
@@ -75,9 +78,43 @@ function EditBlog() {
         }
     };
 
+    const changeCommentPage = async (newPage) => {
+        try {
+            const response = await fetchApi(
+                `/api/admin/blogs/${params.blogId}/comments/page/${newPage}`,
+                "GET",
+            );
+            setComments(response.comments);
+
+            return;
+        } catch (err) {
+            console.log(err);
+            throw err;
+        }
+    };
+
+    const deleteComment = async (commentId) => {
+        if (window.confirm("Are you sure you want to delete this comment?")) {
+            try {
+                const response = await fetchApi(
+                    `/api/admin/blogs/${params.blogId}/comments/${commentId}`,
+                    "DELETE",
+                );
+                setComments(response.remainingComments);
+
+                return;
+            } catch (err) {
+                console.log(err);
+                throw err;
+            }
+        } else {
+            return;
+        }
+    };
+
     return (
         <div className="flex flex-col gap-3 p-5">
-            <h2>Public:</h2>
+            <h2 className="text-2xl">Public:</h2>
             <div className="flex flex-col content-center items-center">
                 <label className="relative inline-block w-15 h-8.5">
                     <input
@@ -157,17 +194,69 @@ function EditBlog() {
             />
             <button
                 onClick={saveChanges}
-                className="bg-green-900 text-white rounded-lg"
+                className="bg-green-900 text-white rounded-lg border border-gray-500"
             >
                 Save Changes
             </button>
             {params.blogId ? (
                 <button
                     onClick={deleteBlogPost}
-                    className="bg-red-900 text-white rounded-lg"
+                    className="bg-red-900 text-white rounded-lg border border-gray-500"
                 >
                     Delete Blog Post
                 </button>
+            ) : null}
+            {params.blogId ? (
+                <div>
+                    <h2 className="text-2xl">Comments:</h2>
+                    {comments?.map((comment) => (
+                        <div
+                            className="border border-gray-500 grid grid-cols-[4fr_1fr] my-4"
+                            key={comment.id}
+                        >
+                            <div className="flex flex-col items-start p-2">
+                                <h4 className="text-white text-xs max-w-[30%]">
+                                    {comment.authoredBy.username}
+                                </h4>
+                                <h3 className="text-white font-semibold text-lg ps-4 text-start">
+                                    {comment.content}
+                                </h3>
+                            </div>
+                            <button
+                                onClick={() => {
+                                    deleteComment(comment.id);
+                                }}
+                                className="bg-red-900 text-white border border-gray-500"
+                            >
+                                Delete
+                            </button>
+                        </div>
+                    ))}
+                    <div className="flex gap-4 justify-center p-4">
+                        <button
+                            disabled={commentPage === 0}
+                            onClick={() => {
+                                const newPage = commentPage - 1;
+                                setCommentPage(newPage);
+                                changeCommentPage(newPage);
+                            }}
+                            className="bg-gray-600"
+                        >
+                            Previous Page
+                        </button>
+                        <button
+                            disabled={comments < 10 || !comments}
+                            onClick={() => {
+                                const newPage = commentPage + 1;
+                                setCommentPage(newPage);
+                                changeCommentPage(newPage);
+                            }}
+                            className="bg-gray-600"
+                        >
+                            Next Page
+                        </button>
+                    </div>
+                </div>
             ) : null}
         </div>
     );

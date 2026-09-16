@@ -1,14 +1,14 @@
 const { prisma } = require("../lib/prisma.js");
 
-async function getAllUsers (req, res, next) {
+async function getAllUsers(req, res, next) {
     try {
         const users = await prisma.user.findMany({
             omit: {
                 hash: true,
                 salt: true,
-                iterationCount: true
-            }
-        })
+                iterationCount: true,
+            },
+        });
         console.log(users);
         return res.json({ users });
     } catch (err) {
@@ -16,7 +16,7 @@ async function getAllUsers (req, res, next) {
     }
 }
 
-async function getUsersByPage (req, res, next) {
+async function getUsersByPage(req, res, next) {
     const SHOWN_USERS = 10;
 
     try {
@@ -24,9 +24,14 @@ async function getUsersByPage (req, res, next) {
             omit: {
                 hash: true,
                 salt: true,
-                iterationCount: true
-            }
-        }).take(SHOWN_USERS).skip(Number(req.params.pageNum) * SHOWN_USERS)
+                iterationCount: true,
+            },
+            orderBy: {
+                createdAt: "asc",
+            },
+            take: SHOWN_USERS,
+            skip: Number(req.params.pageNum) * SHOWN_USERS,
+        });
         console.log(users);
         return res.json({ users });
     } catch (err) {
@@ -34,100 +39,169 @@ async function getUsersByPage (req, res, next) {
     }
 }
 
-async function getUserById (req, res, next) {
+async function getUserById(req, res, next) {
     try {
         const user = await prisma.user.findUnique({
             where: {
-                id: req.params.userId
+                id: req.params.userId,
             },
             omit: {
                 hash: true,
                 salt: true,
-                iterationCount: true
-            }
-        })
+                iterationCount: true,
+            },
+        });
         return res.json({ user });
     } catch (err) {
         return res.json({ error: err.message });
     }
 }
 
-async function getBlogs (req, res, next) {
+async function getBlogs(req, res, next) {
     try {
-        const blogs = await prisma.blogPost.findMany()
+        const blogs = await prisma.blogPost.findMany();
         return res.json({ blogs });
     } catch (err) {
         return res.json({ error: err.message });
     }
 }
 
-async function getBlogById (req, res, next) {
+async function getBlogById(req, res, next) {
     try {
         const blog = await prisma.blogPost.findUnique({
             where: {
-                id: req.params.blogId
-            }
-        })
+                id: req.params.blogId,
+            },
+            include: {
+                comments: {
+                    orderBy: {
+                        createdAt: "asc",
+                    },
+                    take: 10,
+                    include: {
+                        authoredBy: {
+                            select: {
+                                username: true,
+                            },
+                        },
+                    },
+                },
+            },
+        });
         return res.json({ blog });
     } catch (err) {
         return res.json({ error: err.message });
     }
 }
 
-async function postBlogById (req, res, next) {
+async function getBlogsByPage(req, res, next) {
+    const SHOWN_BLOGS = 10;
+
+    try {
+        const blogs = await prisma.blogPost.findMany({
+            orderBy: {
+                createdAt: "asc",
+            },
+            take: SHOWN_BLOGS,
+            skip: Number(req.params.pageNum) * SHOWN_BLOGS,
+        });
+        console.log(blogs);
+        return res.json({ blogs });
+    } catch (err) {
+        return res.json({ error: err.message });
+    }
+}
+
+async function postBlogById(req, res, next) {
     try {
         await prisma.blogPost.create({
             data: {
                 title: req.body.title,
                 content: req.body.content,
-                published: req.body.published
-            }
-        })
+                published: req.body.published,
+            },
+        });
         return res.json({ message: "Blog post posted!" });
     } catch (err) {
         return res.json({ error: err.message });
     }
 }
 
-async function updateBlogById (req, res, next) {
+async function updateBlogById(req, res, next) {
     try {
         await prisma.blogPost.update({
             data: {
                 title: req.body.title,
                 content: req.body.content,
-                published: req.body.published
+                published: req.body.published,
             },
             where: {
-                id: req.params.blogId
-            }
-        })
+                id: req.params.blogId,
+            },
+        });
         return res.json({ message: "Blog post updated!" });
     } catch (err) {
         return res.json({ error: err.message });
     }
 }
 
-async function deleteBlogById (req, res, next) {
+async function deleteBlogById(req, res, next) {
     try {
         await prisma.blogPost.delete({
             where: {
-                id: req.params.blogId
-            }
-        })
+                id: req.params.blogId,
+            },
+        });
         return res.json({ message: "Blog post deleted!" });
     } catch (err) {
         return res.json({ error: err.message });
     }
 }
 
-async function deleteCommentById (req, res, next) {
+async function getCommentsByPage(req, res, next) {
+    const SHOWN_COMMENTS = 10;
+
+    try {
+        const comments = await prisma.comment.findMany({
+            include: {
+                authoredBy: {
+                    select: {
+                        username: true,
+                    },
+                },
+            },
+            orderBy: {
+                createdAt: "asc",
+            },
+            take: SHOWN_COMMENTS,
+            skip: Number(req.params.pageNum) * SHOWN_COMMENTS,
+        });
+        if (!comments) {
+            return res.json({ error: "No comments on this page" });
+        }
+        return res.json({ comments });
+    } catch (err) {
+        return res.json({ error: err.message });
+    }
+}
+
+async function deleteCommentById(req, res, next) {
     try {
         await prisma.comment.delete({
             where: {
-                id: req.params.commentId
-            }
-        })
-        return res.json({ message: "Comment deleted!" });
+                id: req.params.commentId,
+            },
+        });
+        const remainingComments = await prisma.comment.findMany({
+            include: {
+                authoredBy: {
+                    select: {
+                        username: true,
+                    },
+                },
+            },
+        });
+        return res.json({ message: "Comment deleted!", remainingComments });
     } catch (err) {
         return res.json({ error: err.message });
     }
@@ -138,9 +212,11 @@ module.exports = {
     getUsersByPage,
     getUserById,
     getBlogs,
+    getBlogsByPage,
     getBlogById,
     postBlogById,
     updateBlogById,
     deleteBlogById,
+    getCommentsByPage,
     deleteCommentById,
 };

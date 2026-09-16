@@ -59,7 +59,6 @@ async function updateBlogComment (req, res, next) {
 }
 
 async function postBlogComment (req, res, next) {
-    console.log(req.user)
     try {
         await prisma.comment.create({
             data: {
