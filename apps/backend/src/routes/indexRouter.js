@@ -1,6 +1,4 @@
 const { Router } = require("express");
-const indexController = require("../controllers/indexController.js");
-const checkLogin = require("../lib/checkLogin.js")
 const verifyToken = require('../lib/verifyToken.js');
 const authRouter = require("./authRouter.js")
 const clientBlogRouter = require("./clientBlogRouter.js");

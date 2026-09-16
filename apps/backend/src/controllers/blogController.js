@@ -5,7 +5,7 @@ async function getBlogs (req, res, next) {
         const blogs = await prisma.blogPost.findMany()
         return res.json({ blogs });
     } catch (err) {
-        return res.json({ message: err.message });
+        return res.json({ error: err.message });
     }
 }
 
@@ -18,7 +18,7 @@ async function getBlogById (req, res, next) {
         })
         return res.json({ blog });
     } catch (err) {
-        return res.json({ message: err.message });
+        return res.json({ error: err.message });
     }
 }
 
@@ -38,7 +38,7 @@ async function getBlogComments (req, res, next) {
         })
         return res.json({ comments });
     } catch (err) {
-        return res.json({ message: err.message });
+        return res.json({ error: err.message });
     }
 }
 
@@ -54,7 +54,7 @@ async function updateBlogComment (req, res, next) {
         })
         return res.json({ message: "Comment updated!" });
     } catch (err) {
-        return res.json({ message: err.message });
+        return res.json({ error: err.message });
     }
 }
 
@@ -70,7 +70,7 @@ async function postBlogComment (req, res, next) {
         })
         return res.json({ message: "Comment created!" });
     } catch (err) {
-        return res.json({ message: err.message });
+        return res.json({ error: err.message });
     }
 }
 
@@ -84,7 +84,7 @@ async function deleteBlogComment (req, res, next) {
         })
         return res.json({ message: "Comment deleted!" });
     } catch (err) {
-        return res.json({ message: err.message });
+        return res.json({ error: err.message });
     }
 }
 

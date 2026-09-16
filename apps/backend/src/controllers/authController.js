@@ -110,7 +110,6 @@ const loginUser = [
 ];
 
 function getRegisterForm(req, res, next) {
-    // res.render("forms/register", { title: "Register" });
     return res.json({ message: "this is a register form" });
 }
 
