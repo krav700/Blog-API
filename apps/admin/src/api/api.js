@@ -14,17 +14,16 @@ async function fetchApi(path, methodType, bodyParams) {
         }
 
         const data = await response.json();
-        if (!response.ok) {
+        if (!response.ok || data.error) {
             console.log(data)
             throw new Error(
-                data.message || `Request failed: ${response.status}`,
+                data.error || `Request failed: ${response.status}`,
             );
         }
 
         return data;
     } catch (err) {
         console.log(err);
-        console.log("yo")
         throw err;
     }
 }

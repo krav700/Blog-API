@@ -7,6 +7,7 @@ function EditBlog() {
     const [title, setTitle] = useState("");
     const [published, setPublished] = useState(false);
     const [isBeingEdited, setIsBeingEdited] = useState(false);
+    const [, setError] = useState(null);
     const tinyMCAPIKey = import.meta.env.VITE_TINYMC_API_KEY;
     const editorRef = useRef(null);
     let params = useParams();
@@ -24,6 +25,7 @@ function EditBlog() {
                 editorRef.current = blogData.content;
             } catch (err) {
                 console.log(err);
+                setError(() => { throw new Error('Blog post does not exist') })
                 throw err;
             }
         }
@@ -56,6 +58,14 @@ function EditBlog() {
             }
         }
     };
+
+    const deleteBlogPost = async () => {
+        if (window.confirm("Are you sure you want to delete this blog post?")) {
+
+        } else {
+            return;
+        }
+    }
 
     return (
         <div className="flex flex-col gap-3 p-5">
@@ -137,7 +147,7 @@ function EditBlog() {
                         "body { font-family:Helvetica,Arial,sans-serif; font-size:14px } p, h1, h2, h3, h4, h5, h6 { margin: 0 }",
                 }}
             />
-            <button onClick={saveChanges}>Save Changes</button>
+            <button onClick={saveChanges} className="bg-green-900 text-white rounded-lg">Save Changes</button>
         </div>
     );
 }

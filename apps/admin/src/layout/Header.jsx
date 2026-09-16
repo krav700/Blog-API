@@ -3,7 +3,6 @@ import { useLocation } from "react-router-dom"
 
 export default function Header() {
     const location = useLocation();
-    console.log(location.pathname);
 
     return (
         <header className="grid grid-cols-2 justify-evenly items-center sticky w-full bg-gray-800">
