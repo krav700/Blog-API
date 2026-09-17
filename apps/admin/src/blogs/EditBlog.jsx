@@ -245,7 +245,7 @@ function EditBlog() {
                             Previous Page
                         </button>
                         <button
-                            disabled={comments < 10 || !comments}
+                            disabled={comments.length < 10 || !comments}
                             onClick={() => {
                                 const newPage = commentPage + 1;
                                 setCommentPage(newPage);

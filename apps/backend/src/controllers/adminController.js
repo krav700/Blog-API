@@ -30,12 +30,11 @@ async function getUsersByPage(req, res, next) {
                 iterationCount: true,
             },
             orderBy: {
-                createdAt: "asc",
+                username: "asc",
             },
             take: SHOWN_USERS,
             skip: Number(req.params.pageNum) * SHOWN_USERS,
         });
-        console.log(users);
         return res.json({ users });
     } catch (err) {
         return res.json({ error: err.message });

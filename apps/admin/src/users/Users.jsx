@@ -1,16 +1,15 @@
 import { useEffect, useState } from "react";
 import fetchApi from "../api/api";
-import { Link } from "react-router";
 
-function Blogs() {
-    const [blogs, setBlogs] = useState([]);
-    const [blogPage, setBlogPage] = useState(0);
+function Users() {
+    const [users, setUsers] = useState([]);
+    const [userPage, setUserPage] = useState(0);
 
     useEffect(() => {
         async function getBlogs() {
             try {
-                const response = await fetchApi(`/api/admin/blogs`, "GET");
-                setBlogs(response.blogs);
+                const response = await fetchApi(`/api/admin/users`, "GET");
+                setUsers(response.users);
             } catch (err) {
                 console.log(err);
                 throw err;
@@ -19,18 +18,13 @@ function Blogs() {
         getBlogs();
     }, []);
 
-    function strip(html) {
-        let doc = new DOMParser().parseFromString(html, "text/html");
-        return doc.body.textContent || "";
-    }
-
-    const changeBlogPage = async (newPage) => {
+    const changeUserPage = async (newPage) => {
         try {
             const response = await fetchApi(
-                `/api/admin/blogs/pages/${newPage}`,
+                `/api/admin/users/pages/${newPage}`,
                 "GET",
             );
-            setBlogs(response.blogs);
+            setUsers(response.users);
 
             return;
         } catch (err) {
@@ -41,74 +35,62 @@ function Blogs() {
 
     return (
         <div className="p-4">
-            <div className="grid grid-cols-3 items-end">
-                <h1 className="text-4xl sm:text-5xl col-start-2">Blogs</h1>
-                <Link
-                    to={"/admin/blogs/create"}
-                    className="text-xs sm:text-base col-start-3"
-                    viewTransition
-                >
-                    Create Blog
-                </Link>
+            <div>
+                <h1 className="text-4xl sm:text-5xl col-start-2">Users</h1>
             </div>
             <div className="grid grid-cols-1 content-center items-center gap-3 p-5 my-5 sm:m-5 border">
                 <div className="sticky top-0 bg-gray-700 border w-full p-5">
                     <div className="grid grid-cols-[2fr_2fr_1fr] justify-start items-start gap-4">
                         <h2 className="text-xs sm:text-base font-bold flex text-ellipsis">
-                            Title
+                            Name
                         </h2>
 
                         <h2 className="text-xs sm:text-base font-bold flex">
-                            Content
+                            Email
                         </h2>
 
                         <h2 className="text-xs sm:text-base font-bold">
-                            Published
+                            Username
                         </h2>
                     </div>
                 </div>
-                {blogs.length !== 0 &&
-                    blogs.map((blog) => (
-                        <Link
-                            to={`/admin/blogs/${blog.id}`}
-                            className="border w-full p-5"
-                            key={blog.id}
-                            viewTransition
-                        >
+                {users.length !== 0 &&
+                    users.map((user) => (
+                        <div className="border w-full p-5" key={user.id}>
                             <div className="grid grid-cols-[2fr_2fr_1fr] justify-start items-start gap-4 max-h-5 min-w-0 overflow-hidden">
                                 <h2 className="text-sm sm:text-base min-w-0 text-ellipsis text-start whitespace-nowrap overflow-hidden max-h-5">
-                                    {blog.title}
+                                    {user.firstName} {user.lastName}
                                 </h2>
 
                                 <h3 className="text-xs sm:text-sm min-w-0 text-ellipsis text-start whitespace-nowrap overflow-hidden max-h-5">
-                                    {strip(blog.content)}
+                                    {user.email}
                                 </h3>
 
                                 <h3 className="text-xs sm:text-sm">
-                                    {blog.published ? "✅" : "❌"}
+                                    {user.username}
                                 </h3>
                             </div>
-                        </Link>
+                        </div>
                     ))}
             </div>
             <div className="flex gap-4 justify-center p-4">
                 <button
-                    disabled={blogPage === 0}
+                    disabled={userPage === 0}
                     onClick={() => {
-                        const newPage = blogPage - 1;
-                        setBlogPage(newPage);
-                        changeBlogPage(newPage);
+                        const newPage = userPage - 1;
+                        setUserPage(newPage);
+                        changeUserPage(newPage);
                     }}
                     className="bg-gray-600"
                 >
                     Previous Page
                 </button>
                 <button
-                    disabled={blogs.length < 10 || !blogs}
+                    disabled={users.length < 10 || !users}
                     onClick={() => {
-                        const newPage = blogPage + 1;
-                        setBlogPage(newPage);
-                        changeBlogPage(newPage);
+                        const newPage = userPage + 1;
+                        setUserPage(newPage);
+                        changeUserPage(newPage);
                     }}
                     className="bg-gray-600"
                 >
@@ -119,4 +101,4 @@ function Blogs() {
     );
 }
 
-export default Blogs;
+export default Users;

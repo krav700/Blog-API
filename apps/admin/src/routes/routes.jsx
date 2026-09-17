@@ -4,6 +4,7 @@ import CustomErrorBoundary from "../errors/CustomErrorBoundary";
 import Register from "../forms/Register";
 import Blogs from "../blogs/Blogs";
 import EditBlog from "../blogs/EditBlog";
+import Users from "../users/Users";
 
 const routes = [
     {
@@ -24,6 +25,10 @@ const routes = [
                     {
                         path: "admin/blogs",
                         element: <Blogs />,
+                    },
+                    {
+                        path: "admin/users",
+                        element: <Users />,
                     },
                     {
                         path: "admin/blogs/create",
