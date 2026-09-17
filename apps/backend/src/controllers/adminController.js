@@ -8,8 +8,11 @@ async function getAllUsers(req, res, next) {
                 salt: true,
                 iterationCount: true,
             },
+            take: 10,
+            orderBy: {
+                username: "asc",
+            },
         });
-        console.log(users);
         return res.json({ users });
     } catch (err) {
         return res.json({ error: err.message });
@@ -59,7 +62,12 @@ async function getUserById(req, res, next) {
 
 async function getBlogs(req, res, next) {
     try {
-        const blogs = await prisma.blogPost.findMany();
+        const blogs = await prisma.blogPost.findMany({
+            take: 10,
+            orderBy: {
+                createdAt: "asc",
+            },
+        });
         return res.json({ blogs });
     } catch (err) {
         return res.json({ error: err.message });
@@ -105,7 +113,6 @@ async function getBlogsByPage(req, res, next) {
             take: SHOWN_BLOGS,
             skip: Number(req.params.pageNum) * SHOWN_BLOGS,
         });
-        console.log(blogs);
         return res.json({ blogs });
     } catch (err) {
         return res.json({ error: err.message });
