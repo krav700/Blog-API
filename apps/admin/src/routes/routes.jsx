@@ -1,10 +1,10 @@
 import App from "../App";
-import Login from "../forms/Login";
+import Login from "../components/forms/Login";
 import CustomErrorBoundary from "../errors/CustomErrorBoundary";
-import Register from "../forms/Register";
-import Blogs from "../blogs/Blogs";
-import EditBlog from "../blogs/EditBlog";
-import Users from "../users/Users";
+import Register from "../components/forms/Register";
+import Blogs from "../components/blogs/Blogs";
+import EditBlog from "../components/blogs/EditBlog";
+import Users from "../components/users/Users";
 
 const routes = [
     {

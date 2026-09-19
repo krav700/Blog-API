@@ -1,5 +1,5 @@
 import { useState } from "react";
-import fetchApi from "../api/api.js";
+import fetchApi from "../../api/api.js";
 
 function Register() {
     const [firstName, setFirstName] = useState("");

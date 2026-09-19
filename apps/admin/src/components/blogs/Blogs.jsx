@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import fetchApi from "../api/api";
+import fetchApi from "../../api/api";
 import { Link } from "react-router";
 
 function Blogs() {
