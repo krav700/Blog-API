@@ -1,4 +1,29 @@
 const { prisma } = require("../lib/prisma.js");
+const jwt = require("jsonwebtoken");
+
+async function getCurrentUser(req, res, next) {
+    try {
+        const user = await prisma.user.findUnique({
+            where: {
+                id: req.user?.id,
+            },
+            omit: {
+                hash: true,
+                salt: true,
+                iterationCount: true,
+            },
+        });
+
+        if (!user) {
+            console.log("User does not exist");
+            return res.status(404).json({ message: "User not found" });
+        }
+        console.log(user)
+        return res.json({ user });
+    } catch (err) {
+        return res.json({ error: err.message });
+    }
+}
 
 async function getAllUsers(req, res, next) {
     try {
@@ -243,6 +268,7 @@ async function deleteCommentById(req, res, next) {
 }
 
 module.exports = {
+    getCurrentUser,
     getAllUsers,
     getUsersByPage,
     getUserById,

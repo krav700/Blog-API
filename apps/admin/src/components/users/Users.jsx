@@ -51,14 +51,18 @@ function Users() {
     }
 
     async function deleteUser(user) {
-        if (window.confirm("Are you sure you want to delete this blog post?")) {
-            try {
-                await fetchApi(`/api/admin/users/${user.id}`, "DELETE");
+        if (user.isAdmin) {
+            if (window.confirm("Are you sure you want to delete this blog post?")) {
+                try {
+                    await fetchApi(`/api/admin/users/${user.id}`, "DELETE");
 
+                    return;
+                } catch (err) {
+                    console.log(err);
+                    throw err;
+                }
+            } else {
                 return;
-            } catch (err) {
-                console.log(err);
-                throw err;
             }
         } else {
             return;

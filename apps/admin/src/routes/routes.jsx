@@ -5,8 +5,24 @@ import Register from "../components/forms/Register";
 import Blogs from "../components/blogs/Blogs";
 import EditBlog from "../components/blogs/EditBlog";
 import Users from "../components/users/Users";
+import AdminApprovalRequired from "../errors/AdminApprovalRequired";
 
 const routes = [
+    {
+        path: '/auth/needAdminApproval',
+        element: <AdminApprovalRequired />,
+        errorElement: <CustomErrorBoundary />,
+    },
+    {
+        path: '/auth/login',
+        element: <Login />,
+        errorElement: <CustomErrorBoundary />,
+    },
+    {
+        path: '/auth/register',
+        element: <Register />,
+        errorElement: <CustomErrorBoundary />,
+    },
     {
         path: "/",
         element: <App />,
@@ -14,14 +30,6 @@ const routes = [
             {
                 errorElement: <CustomErrorBoundary />,
                 children: [
-                    {
-                        path: "/auth/login",
-                        element: <Login />,
-                    },
-                    {
-                        path: "/auth/register",
-                        element: <Register />,
-                    },
                     {
                         path: "admin/blogs",
                         element: <Blogs />,

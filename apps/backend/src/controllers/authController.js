@@ -94,7 +94,14 @@ const loginUser = [
                 }
 
                 jwt.sign(
-                    { user },
+                    {
+                        id: user,
+                        firstName: user.firstName,
+                        lastName: user.lastName,
+                        username: user.username,
+                        email: user.email,
+                        isAdmin: user.isAdmin
+                    },
                     process.env.JWT_SECRET_KEY,
                     { expiresIn: "2d" },
                     (err, token) => {

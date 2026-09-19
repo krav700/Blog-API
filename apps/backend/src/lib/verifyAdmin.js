@@ -1,11 +1,19 @@
-function verifyAdmin(req, res, next) {
+const jwt = require("jsonwebtoken");
 
-    // if (req.user.admin) {
-    //     return next();
-    // } else {
-    //     return res.sendStatus(403);
-    // }
-    return next()
+function verifyAdmin(req, res, next) {
+    jwt.verify(req.token, process.env.JWT_SECRET_KEY, (err, authData) => {
+        if (err) {
+            console.log("Failed Auth")
+            return res.status(403).json({ error: 'Authentication failed' });
+        }
+
+        if (req.user.isAdmin) {
+            console.log("Passed")
+            return next();
+        } else {
+            return res.status(403).json({ error: 'User is not an Admin' });
+        }
+    });
 }
 
 module.exports = verifyAdmin;
