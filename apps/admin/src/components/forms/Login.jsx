@@ -20,7 +20,7 @@ function Login() {
             }
 
             localStorage.setItem("token", data.token);
-            window.location.href = "/";
+            window.location.href = "/admin/blogs";
         } catch (err) {
             console.log("Login failed:", err);
         }

@@ -99,7 +99,7 @@ function Blogs() {
                         setBlogPage(newPage);
                         changeBlogPage(newPage);
                     }}
-                    className="bg-gray-600"
+                    className="bg-gray-600 p-2 rounded-lg"
                 >
                     Previous Page
                 </button>
@@ -110,7 +110,7 @@ function Blogs() {
                         setBlogPage(newPage);
                         changeBlogPage(newPage);
                     }}
-                    className="bg-gray-600"
+                    className="bg-gray-600 p-2 rounded-lg"
                 >
                     Next Page
                 </button>

@@ -142,6 +142,7 @@ textarea,
 select {
     font: inherit;
     border: none;
+    padding: 0;
 }
 
 a, link {
