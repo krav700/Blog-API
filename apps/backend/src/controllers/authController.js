@@ -35,6 +35,12 @@ const validateRegister = [
         .withMessage(`Last Name ${emptyErr}`)
         .isLength({ min: 3, max: 50 })
         .withMessage(`Last Name ${lengthErr}`),
+    body("email")
+        .trim()
+        .notEmpty()
+        .withMessage(`Email ${emptyErr}`)
+        .isEmail()
+        .withMessage(`Email must be a proper email.`),
     body("username")
         .trim()
         .notEmpty()
@@ -74,15 +80,24 @@ const loginUser = [
     validateLogin,
     (req, res, next) => {
         return passport.authenticate("local", function (err, user, info) {
+            const { username } = req.body;
             if (err) {
                 console.log(err);
                 return next(err);
             }
 
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                return res.status(400).json({
+                    errors: errors.array(),
+                    username,
+                });
+            }
+
             if (!user) {
                 console.log(info?.message || "Authentication failed");
                 return res.json({
-                    message: info?.message || "Authentication failed",
+                    error: info?.message || "Authentication failed",
                     href: "/auth/login",
                 });
             }
@@ -108,6 +123,7 @@ const loginUser = [
                         return res.json({
                             message: "Login successful",
                             token,
+                            isAdmin: user.isAdmin,
                         });
                     },
                 );

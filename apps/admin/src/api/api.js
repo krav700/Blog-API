@@ -14,7 +14,7 @@ async function fetchApi(path, methodType, bodyParams) {
         }
 
         const data = await response.json();
-        if (!response.ok || data.error) {
+        if (!response.ok && response.status !== 400 || data.error) {
             console.log(data)
             throw new Error(
                 data.error || `Request failed: ${response.status}`,

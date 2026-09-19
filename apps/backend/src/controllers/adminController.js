@@ -17,7 +17,6 @@ async function getCurrentUser(req, res, next) {
             console.log("User does not exist");
             return res.status(404).json({ message: "User not found" });
         }
-        console.log(user);
         return res.json({ user });
     } catch (err) {
         return res.json({ error: err.message });
@@ -100,13 +99,29 @@ async function updateUser(req, res, next) {
 }
 
 async function deleteUser(req, res, next) {
+    const SHOWN_USERS = 10;
+
     try {
         await prisma.user.delete({
             where: {
                 id: req.params.userId,
             },
         });
-        return res.json({ message: "User post deleted!" });
+
+        const users = await prisma.user.findMany({
+            omit: {
+                hash: true,
+                salt: true,
+                iterationCount: true,
+            },
+            orderBy: {
+                username: "asc",
+            },
+            take: SHOWN_USERS,
+            skip: Number(req.params.pageNum ?? 0) * SHOWN_USERS,
+        });
+
+        return res.json({ message: "User post deleted!", users });
     } catch (err) {
         return res.json({ error: err.message });
     }
@@ -251,7 +266,7 @@ async function deleteCommentById(req, res, next) {
                 id: req.params.commentId,
             },
         });
-        const remainingComments = await prisma.comment.findMany({
+        const comments = await prisma.comment.findMany({
             include: {
                 authoredBy: {
                     select: {
@@ -260,7 +275,7 @@ async function deleteCommentById(req, res, next) {
                 },
             },
         });
-        return res.json({ message: "Comment deleted!", remainingComments });
+        return res.json({ message: "Comment deleted!", comments });
     } catch (err) {
         return res.json({ error: err.message });
     }

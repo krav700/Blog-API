@@ -100,7 +100,7 @@ function EditBlog() {
                     `/api/admin/blogs/${params.blogId}/comments/${commentId}`,
                     "DELETE",
                 );
-                setComments(response.remainingComments);
+                setComments(response.comments);
 
                 return;
             } catch (err) {

@@ -34,7 +34,7 @@ function Users() {
     };
 
     async function promoteToAdmin(user) {
-        if (window.confirm("Are you sure you want to delete this blog post?")) {
+        if (window.confirm("Are you sure you want to promote this user?")) {
             try {
                 await fetchApi(`/api/admin/users/${user.id}`, "PUT", {
                     isAdmin: true,
@@ -51,18 +51,16 @@ function Users() {
     }
 
     async function deleteUser(user) {
-        if (user.isAdmin) {
-            if (window.confirm("Are you sure you want to delete this blog post?")) {
-                try {
-                    await fetchApi(`/api/admin/users/${user.id}`, "DELETE");
+        if (window.confirm("Are you sure you want to delete this user?")) {
+            try {
+                const response = await fetchApi(`/api/admin/users/${user.id}`, "DELETE");
+                console.log(response);
+                setUsers(response.users);
 
-                    return;
-                } catch (err) {
-                    console.log(err);
-                    throw err;
-                }
-            } else {
                 return;
+            } catch (err) {
+                console.log(err);
+                throw err;
             }
         } else {
             return;
@@ -113,7 +111,7 @@ function Users() {
                                 <h3 className="overflow-x-scroll text-xs sm:text-sm text-start whitespace-nowrap max-w-full">
                                     {user.username}
                                 </h3>
-                                {console.log(user)}
+
                                 <button
                                     disabled={user.isAdmin}
                                     onClick={() => {
@@ -124,9 +122,13 @@ function Users() {
                                     Promote
                                 </button>
 
-                                <button onClick={() => {
-                                    deleteUser(user);
-                                }} className="w-full p-1 rounded-lg bg-red-900 text-white">
+                                <button
+                                    disabled={localStorage.getItem('username') === user.username}
+                                    onClick={() => {
+                                        deleteUser(user);
+                                    }}
+                                    className="disabled:bg-gray-500 disabled:text-gray-400 w-full p-1 rounded-lg bg-red-900 text-white"
+                                >
                                     Delete
                                 </button>
                             </div>

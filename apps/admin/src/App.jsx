@@ -10,7 +10,7 @@ function App() {
         try {
             const user = await fetchApi(`/api/admin/me`, "GET");
 
-            if (!user?.isAdmin) {
+            if (!user?.user?.isAdmin) {
               // window.location.href = "/auth/needAdminApproval";
             }
 
