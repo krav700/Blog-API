@@ -100,7 +100,7 @@ const loginUser = [
                         lastName: user.lastName,
                         username: user.username,
                         email: user.email,
-                        isAdmin: user.isAdmin
+                        isAdmin: user.isAdmin,
                     },
                     process.env.JWT_SECRET_KEY,
                     { expiresIn: "2d" },

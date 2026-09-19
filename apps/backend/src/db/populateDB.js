@@ -9,6 +9,8 @@ async function main() {
             firstName: "Jhon",
             lastName: "Doe",
             username: "JhonDoe",
+            email: "jhon@email.com",
+            isAdmin: true,
             hash: "123",
             salt: "123",
             iterationCount: 60000

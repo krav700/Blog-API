@@ -1,6 +1,5 @@
 const { Router } = require("express");
 const blogController = require("../controllers/blogController.js");
-const checkLogin = require("../lib/checkLogin.js")
 const verifyToken = require('../lib/verifyToken.js')
 
 const clientBlogRouter = Router();

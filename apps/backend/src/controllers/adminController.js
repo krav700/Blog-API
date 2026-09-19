@@ -1,5 +1,4 @@
 const { prisma } = require("../lib/prisma.js");
-const jwt = require("jsonwebtoken");
 
 async function getCurrentUser(req, res, next) {
     try {
@@ -18,7 +17,7 @@ async function getCurrentUser(req, res, next) {
             console.log("User does not exist");
             return res.status(404).json({ message: "User not found" });
         }
-        console.log(user)
+        console.log(user);
         return res.json({ user });
     } catch (err) {
         return res.json({ error: err.message });
@@ -92,9 +91,9 @@ async function updateUser(req, res, next) {
             },
             data: {
                 isAdmin: req.body.isAdmin,
-            }
+            },
         });
-        return res.json({ message: 'User updated successfully!' });
+        return res.json({ message: "User updated successfully!" });
     } catch (err) {
         return res.json({ error: err.message });
     }

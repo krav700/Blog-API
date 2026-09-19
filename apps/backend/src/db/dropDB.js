@@ -3,8 +3,9 @@ const { prisma } = require("../lib/prisma.js");
 
 async function main() {
     console.log("deleting...");
-    // await prisma.file.deleteMany({})
-    // await prisma.user.deleteMany({})
+    await prisma.comment.deleteMany({})
+    await prisma.blogPost.deleteMany({})
+    await prisma.user.deleteMany({})
     console.log("done");
 }
 
