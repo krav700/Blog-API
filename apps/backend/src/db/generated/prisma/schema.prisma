@@ -25,6 +25,7 @@ model User {
   hash           String
   salt           String
   iterationCount Int
+  isAdmin        Boolean   @default(false)
   comments       Comment[]
 }
 

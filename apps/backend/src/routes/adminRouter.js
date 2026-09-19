@@ -8,7 +8,8 @@ const adminRouter = Router();
 
 adminRouter.get("/users", verifyToken, verifyAdmin, adminController.getAllUsers );
 adminRouter.get("/users/pages/:pageNum", verifyToken, verifyAdmin, adminController.getUsersByPage );
-adminRouter.delete("/users/:userId", verifyToken, verifyAdmin, adminController.getUserById);
+adminRouter.put("/users/:userId", verifyToken, verifyAdmin, adminController.updateUser );
+adminRouter.delete("/users/:userId", verifyToken, verifyAdmin, adminController.deleteUser);
 
 adminRouter.get("/blogs", verifyToken, verifyAdmin, adminController.getBlogs );
 adminRouter.get("/blogs/pages/:pageNum", verifyToken, verifyAdmin, adminController.getBlogsByPage );

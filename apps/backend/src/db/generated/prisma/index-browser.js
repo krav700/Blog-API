@@ -128,7 +128,8 @@ exports.Prisma.UserScalarFieldEnum = {
   username: 'username',
   hash: 'hash',
   salt: 'salt',
-  iterationCount: 'iterationCount'
+  iterationCount: 'iterationCount',
+  isAdmin: 'isAdmin'
 };
 
 exports.Prisma.BlogPostScalarFieldEnum = {

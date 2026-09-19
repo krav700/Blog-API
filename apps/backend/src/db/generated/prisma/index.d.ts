@@ -1236,6 +1236,7 @@ export namespace Prisma {
     hash: string | null
     salt: string | null
     iterationCount: number | null
+    isAdmin: boolean | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -1247,6 +1248,7 @@ export namespace Prisma {
     hash: string | null
     salt: string | null
     iterationCount: number | null
+    isAdmin: boolean | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -1258,6 +1260,7 @@ export namespace Prisma {
     hash: number
     salt: number
     iterationCount: number
+    isAdmin: number
     _all: number
   }
 
@@ -1279,6 +1282,7 @@ export namespace Prisma {
     hash?: true
     salt?: true
     iterationCount?: true
+    isAdmin?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -1290,6 +1294,7 @@ export namespace Prisma {
     hash?: true
     salt?: true
     iterationCount?: true
+    isAdmin?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -1301,6 +1306,7 @@ export namespace Prisma {
     hash?: true
     salt?: true
     iterationCount?: true
+    isAdmin?: true
     _all?: true
   }
 
@@ -1399,6 +1405,7 @@ export namespace Prisma {
     hash: string
     salt: string
     iterationCount: number
+    isAdmin: boolean
     _count: UserCountAggregateOutputType | null
     _avg: UserAvgAggregateOutputType | null
     _sum: UserSumAggregateOutputType | null
@@ -1429,6 +1436,7 @@ export namespace Prisma {
     hash?: boolean
     salt?: boolean
     iterationCount?: boolean
+    isAdmin?: boolean
     comments?: boolean | User$commentsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
@@ -1442,6 +1450,7 @@ export namespace Prisma {
     hash?: boolean
     salt?: boolean
     iterationCount?: boolean
+    isAdmin?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1453,6 +1462,7 @@ export namespace Prisma {
     hash?: boolean
     salt?: boolean
     iterationCount?: boolean
+    isAdmin?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -1464,9 +1474,10 @@ export namespace Prisma {
     hash?: boolean
     salt?: boolean
     iterationCount?: boolean
+    isAdmin?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "firstName" | "lastName" | "email" | "username" | "hash" | "salt" | "iterationCount", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "firstName" | "lastName" | "email" | "username" | "hash" | "salt" | "iterationCount" | "isAdmin", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     comments?: boolean | User$commentsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -1488,6 +1499,7 @@ export namespace Prisma {
       hash: string
       salt: string
       iterationCount: number
+      isAdmin: boolean
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -1920,6 +1932,7 @@ export namespace Prisma {
     readonly hash: FieldRef<"User", 'String'>
     readonly salt: FieldRef<"User", 'String'>
     readonly iterationCount: FieldRef<"User", 'Int'>
+    readonly isAdmin: FieldRef<"User", 'Boolean'>
   }
     
 
@@ -5516,7 +5529,8 @@ export namespace Prisma {
     username: 'username',
     hash: 'hash',
     salt: 'salt',
-    iterationCount: 'iterationCount'
+    iterationCount: 'iterationCount',
+    isAdmin: 'isAdmin'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -5606,6 +5620,13 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
    * Reference to a field of type 'DateTime'
    */
   export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
@@ -5616,13 +5637,6 @@ export namespace Prisma {
    * Reference to a field of type 'DateTime[]'
    */
   export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'Boolean'
-   */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -5655,6 +5669,7 @@ export namespace Prisma {
     hash?: StringFilter<"User"> | string
     salt?: StringFilter<"User"> | string
     iterationCount?: IntFilter<"User"> | number
+    isAdmin?: BoolFilter<"User"> | boolean
     comments?: CommentListRelationFilter
   }
 
@@ -5667,6 +5682,7 @@ export namespace Prisma {
     hash?: SortOrder
     salt?: SortOrder
     iterationCount?: SortOrder
+    isAdmin?: SortOrder
     comments?: CommentOrderByRelationAggregateInput
   }
 
@@ -5682,6 +5698,7 @@ export namespace Prisma {
     hash?: StringFilter<"User"> | string
     salt?: StringFilter<"User"> | string
     iterationCount?: IntFilter<"User"> | number
+    isAdmin?: BoolFilter<"User"> | boolean
     comments?: CommentListRelationFilter
   }, "id" | "email" | "username">
 
@@ -5694,6 +5711,7 @@ export namespace Prisma {
     hash?: SortOrder
     salt?: SortOrder
     iterationCount?: SortOrder
+    isAdmin?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _avg?: UserAvgOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
@@ -5713,6 +5731,7 @@ export namespace Prisma {
     hash?: StringWithAggregatesFilter<"User"> | string
     salt?: StringWithAggregatesFilter<"User"> | string
     iterationCount?: IntWithAggregatesFilter<"User"> | number
+    isAdmin?: BoolWithAggregatesFilter<"User"> | boolean
   }
 
   export type BlogPostWhereInput = {
@@ -5894,6 +5913,7 @@ export namespace Prisma {
     hash: string
     salt: string
     iterationCount: number
+    isAdmin?: boolean
     comments?: CommentCreateNestedManyWithoutAuthoredByInput
   }
 
@@ -5906,6 +5926,7 @@ export namespace Prisma {
     hash: string
     salt: string
     iterationCount: number
+    isAdmin?: boolean
     comments?: CommentUncheckedCreateNestedManyWithoutAuthoredByInput
   }
 
@@ -5918,6 +5939,7 @@ export namespace Prisma {
     hash?: StringFieldUpdateOperationsInput | string
     salt?: StringFieldUpdateOperationsInput | string
     iterationCount?: IntFieldUpdateOperationsInput | number
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
     comments?: CommentUpdateManyWithoutAuthoredByNestedInput
   }
 
@@ -5930,6 +5952,7 @@ export namespace Prisma {
     hash?: StringFieldUpdateOperationsInput | string
     salt?: StringFieldUpdateOperationsInput | string
     iterationCount?: IntFieldUpdateOperationsInput | number
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
     comments?: CommentUncheckedUpdateManyWithoutAuthoredByNestedInput
   }
 
@@ -5942,6 +5965,7 @@ export namespace Prisma {
     hash: string
     salt: string
     iterationCount: number
+    isAdmin?: boolean
   }
 
   export type UserUpdateManyMutationInput = {
@@ -5953,6 +5977,7 @@ export namespace Prisma {
     hash?: StringFieldUpdateOperationsInput | string
     salt?: StringFieldUpdateOperationsInput | string
     iterationCount?: IntFieldUpdateOperationsInput | number
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -5964,6 +5989,7 @@ export namespace Prisma {
     hash?: StringFieldUpdateOperationsInput | string
     salt?: StringFieldUpdateOperationsInput | string
     iterationCount?: IntFieldUpdateOperationsInput | number
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type BlogPostCreateInput = {
@@ -6181,6 +6207,11 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type CommentListRelationFilter = {
     every?: CommentWhereInput
     some?: CommentWhereInput
@@ -6200,6 +6231,7 @@ export namespace Prisma {
     hash?: SortOrder
     salt?: SortOrder
     iterationCount?: SortOrder
+    isAdmin?: SortOrder
   }
 
   export type UserAvgOrderByAggregateInput = {
@@ -6215,6 +6247,7 @@ export namespace Prisma {
     hash?: SortOrder
     salt?: SortOrder
     iterationCount?: SortOrder
+    isAdmin?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -6226,6 +6259,7 @@ export namespace Prisma {
     hash?: SortOrder
     salt?: SortOrder
     iterationCount?: SortOrder
+    isAdmin?: SortOrder
   }
 
   export type UserSumOrderByAggregateInput = {
@@ -6281,6 +6315,14 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -6290,11 +6332,6 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
-  }
-
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type BlogPostCountOrderByAggregateInput = {
@@ -6336,14 +6373,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type UserScalarRelationFilter = {
@@ -6430,6 +6459,10 @@ export namespace Prisma {
     divide?: number
   }
 
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
   export type CommentUpdateManyWithoutAuthoredByNestedInput = {
     create?: XOR<CommentCreateWithoutAuthoredByInput, CommentUncheckedCreateWithoutAuthoredByInput> | CommentCreateWithoutAuthoredByInput[] | CommentUncheckedCreateWithoutAuthoredByInput[]
     connectOrCreate?: CommentCreateOrConnectWithoutAuthoredByInput | CommentCreateOrConnectWithoutAuthoredByInput[]
@@ -6474,10 +6507,6 @@ export namespace Prisma {
 
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
-  }
-
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
   }
 
   export type CommentUpdateManyWithoutBlogNestedInput = {
@@ -6572,6 +6601,11 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type NestedUuidWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -6630,6 +6664,14 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -6639,11 +6681,6 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
-  }
-
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -6658,14 +6695,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
-  }
-
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type CommentCreateWithoutAuthoredByInput = {
@@ -6773,6 +6802,7 @@ export namespace Prisma {
     hash: string
     salt: string
     iterationCount: number
+    isAdmin?: boolean
   }
 
   export type UserUncheckedCreateWithoutCommentsInput = {
@@ -6784,6 +6814,7 @@ export namespace Prisma {
     hash: string
     salt: string
     iterationCount: number
+    isAdmin?: boolean
   }
 
   export type UserCreateOrConnectWithoutCommentsInput = {
@@ -6834,6 +6865,7 @@ export namespace Prisma {
     hash?: StringFieldUpdateOperationsInput | string
     salt?: StringFieldUpdateOperationsInput | string
     iterationCount?: IntFieldUpdateOperationsInput | number
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type UserUncheckedUpdateWithoutCommentsInput = {
@@ -6845,6 +6877,7 @@ export namespace Prisma {
     hash?: StringFieldUpdateOperationsInput | string
     salt?: StringFieldUpdateOperationsInput | string
     iterationCount?: IntFieldUpdateOperationsInput | number
+    isAdmin?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type BlogPostUpsertWithoutCommentsInput = {

@@ -59,6 +59,35 @@ async function getUserById(req, res, next) {
     }
 }
 
+async function updateUser(req, res, next) {
+    try {
+        await prisma.user.update({
+            where: {
+                id: req.params.userId,
+            },
+            data: {
+                isAdmin: req.body.isAdmin,
+            }
+        });
+        return res.json({ message: 'User updated successfully!' });
+    } catch (err) {
+        return res.json({ error: err.message });
+    }
+}
+
+async function deleteUser(req, res, next) {
+    try {
+        await prisma.user.delete({
+            where: {
+                id: req.params.userId,
+            },
+        });
+        return res.json({ message: "User post deleted!" });
+    } catch (err) {
+        return res.json({ error: err.message });
+    }
+}
+
 async function getBlogs(req, res, next) {
     try {
         const blogs = await prisma.blogPost.findMany({
@@ -217,6 +246,8 @@ module.exports = {
     getAllUsers,
     getUsersByPage,
     getUserById,
+    updateUser,
+    deleteUser,
     getBlogs,
     getBlogsByPage,
     getBlogById,
