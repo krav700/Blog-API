@@ -8,6 +8,7 @@ A Blog-API application consisting of a backend, client-facing app, and an admin 
 - Postgress - Database
 - Prisma - ORM
 - CORS
+- Render - Backend/Database Deployment
 
 ## For the client/admin the following technlogies were used:
 - Vite - bundler
@@ -17,6 +18,7 @@ A Blog-API application consisting of a backend, client-facing app, and an admin 
 - HTTP - requests/api
 - TinyMC - In browser Text Editor
 - lucide-react - Icons
+- Vercel - Deployment
 
 ### Preview of the interfaces
 
