@@ -1,13 +1,8 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider        = "prisma-client-js"
   output          = "../src/db/generated/prisma"
   previewFeatures = ["driverAdapters"]
+  binaryTargets   = ["native", "debian-openssl-3.0.x"]
 }
 
 datasource db {
@@ -30,32 +25,24 @@ model User {
 }
 
 model BlogPost {
-  id String @id @default(uuid()) @db.Uuid
-
-  title   String
-  content String
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  published Boolean @default(false)
-
-  comments Comment[]
+  id        String    @id @default(uuid()) @db.Uuid
+  title     String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  published Boolean   @default(false)
+  content   String
+  comments  Comment[]
 }
 
 model Comment {
-  id String @id @default(uuid()) @db.Uuid
-
-  content String
-
-  authorId   String @db.Uuid
-  authoredBy User   @relation(fields: [authorId], references: [id])
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  blogId String   @db.Uuid
-  blog   BlogPost @relation(fields: [blogId], references: [id], onDelete: Cascade)
+  id         String   @id @default(uuid()) @db.Uuid
+  authorId   String   @db.Uuid
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  blogId     String   @db.Uuid
+  content    String
+  authoredBy User     @relation(fields: [authorId], references: [id])
+  blog       BlogPost @relation(fields: [blogId], references: [id], onDelete: Cascade)
 }
 
 model Session {

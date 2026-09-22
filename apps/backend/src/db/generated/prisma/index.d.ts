@@ -2376,28 +2376,28 @@ export namespace Prisma {
   export type BlogPostMinAggregateOutputType = {
     id: string | null
     title: string | null
-    content: string | null
     createdAt: Date | null
     updatedAt: Date | null
     published: boolean | null
+    content: string | null
   }
 
   export type BlogPostMaxAggregateOutputType = {
     id: string | null
     title: string | null
-    content: string | null
     createdAt: Date | null
     updatedAt: Date | null
     published: boolean | null
+    content: string | null
   }
 
   export type BlogPostCountAggregateOutputType = {
     id: number
     title: number
-    content: number
     createdAt: number
     updatedAt: number
     published: number
+    content: number
     _all: number
   }
 
@@ -2405,28 +2405,28 @@ export namespace Prisma {
   export type BlogPostMinAggregateInputType = {
     id?: true
     title?: true
-    content?: true
     createdAt?: true
     updatedAt?: true
     published?: true
+    content?: true
   }
 
   export type BlogPostMaxAggregateInputType = {
     id?: true
     title?: true
-    content?: true
     createdAt?: true
     updatedAt?: true
     published?: true
+    content?: true
   }
 
   export type BlogPostCountAggregateInputType = {
     id?: true
     title?: true
-    content?: true
     createdAt?: true
     updatedAt?: true
     published?: true
+    content?: true
     _all?: true
   }
 
@@ -2505,10 +2505,10 @@ export namespace Prisma {
   export type BlogPostGroupByOutputType = {
     id: string
     title: string
-    content: string
     createdAt: Date
     updatedAt: Date
     published: boolean
+    content: string
     _count: BlogPostCountAggregateOutputType | null
     _min: BlogPostMinAggregateOutputType | null
     _max: BlogPostMaxAggregateOutputType | null
@@ -2531,10 +2531,10 @@ export namespace Prisma {
   export type BlogPostSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     title?: boolean
-    content?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     published?: boolean
+    content?: boolean
     comments?: boolean | BlogPost$commentsArgs<ExtArgs>
     _count?: boolean | BlogPostCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["blogPost"]>
@@ -2542,31 +2542,31 @@ export namespace Prisma {
   export type BlogPostSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     title?: boolean
-    content?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     published?: boolean
+    content?: boolean
   }, ExtArgs["result"]["blogPost"]>
 
   export type BlogPostSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     title?: boolean
-    content?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     published?: boolean
+    content?: boolean
   }, ExtArgs["result"]["blogPost"]>
 
   export type BlogPostSelectScalar = {
     id?: boolean
     title?: boolean
-    content?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     published?: boolean
+    content?: boolean
   }
 
-  export type BlogPostOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "content" | "createdAt" | "updatedAt" | "published", ExtArgs["result"]["blogPost"]>
+  export type BlogPostOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "createdAt" | "updatedAt" | "published" | "content", ExtArgs["result"]["blogPost"]>
   export type BlogPostInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     comments?: boolean | BlogPost$commentsArgs<ExtArgs>
     _count?: boolean | BlogPostCountOutputTypeDefaultArgs<ExtArgs>
@@ -2582,10 +2582,10 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       title: string
-      content: string
       createdAt: Date
       updatedAt: Date
       published: boolean
+      content: string
     }, ExtArgs["result"]["blogPost"]>
     composites: {}
   }
@@ -3012,10 +3012,10 @@ export namespace Prisma {
   interface BlogPostFieldRefs {
     readonly id: FieldRef<"BlogPost", 'String'>
     readonly title: FieldRef<"BlogPost", 'String'>
-    readonly content: FieldRef<"BlogPost", 'String'>
     readonly createdAt: FieldRef<"BlogPost", 'DateTime'>
     readonly updatedAt: FieldRef<"BlogPost", 'DateTime'>
     readonly published: FieldRef<"BlogPost", 'Boolean'>
+    readonly content: FieldRef<"BlogPost", 'String'>
   }
     
 
@@ -3458,58 +3458,58 @@ export namespace Prisma {
 
   export type CommentMinAggregateOutputType = {
     id: string | null
-    content: string | null
     authorId: string | null
     createdAt: Date | null
     updatedAt: Date | null
     blogId: string | null
+    content: string | null
   }
 
   export type CommentMaxAggregateOutputType = {
     id: string | null
-    content: string | null
     authorId: string | null
     createdAt: Date | null
     updatedAt: Date | null
     blogId: string | null
+    content: string | null
   }
 
   export type CommentCountAggregateOutputType = {
     id: number
-    content: number
     authorId: number
     createdAt: number
     updatedAt: number
     blogId: number
+    content: number
     _all: number
   }
 
 
   export type CommentMinAggregateInputType = {
     id?: true
-    content?: true
     authorId?: true
     createdAt?: true
     updatedAt?: true
     blogId?: true
+    content?: true
   }
 
   export type CommentMaxAggregateInputType = {
     id?: true
-    content?: true
     authorId?: true
     createdAt?: true
     updatedAt?: true
     blogId?: true
+    content?: true
   }
 
   export type CommentCountAggregateInputType = {
     id?: true
-    content?: true
     authorId?: true
     createdAt?: true
     updatedAt?: true
     blogId?: true
+    content?: true
     _all?: true
   }
 
@@ -3587,11 +3587,11 @@ export namespace Prisma {
 
   export type CommentGroupByOutputType = {
     id: string
-    content: string
     authorId: string
     createdAt: Date
     updatedAt: Date
     blogId: string
+    content: string
     _count: CommentCountAggregateOutputType | null
     _min: CommentMinAggregateOutputType | null
     _max: CommentMaxAggregateOutputType | null
@@ -3613,47 +3613,47 @@ export namespace Prisma {
 
   export type CommentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    content?: boolean
     authorId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     blogId?: boolean
+    content?: boolean
     authoredBy?: boolean | UserDefaultArgs<ExtArgs>
     blog?: boolean | BlogPostDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["comment"]>
 
   export type CommentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    content?: boolean
     authorId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     blogId?: boolean
+    content?: boolean
     authoredBy?: boolean | UserDefaultArgs<ExtArgs>
     blog?: boolean | BlogPostDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["comment"]>
 
   export type CommentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    content?: boolean
     authorId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     blogId?: boolean
+    content?: boolean
     authoredBy?: boolean | UserDefaultArgs<ExtArgs>
     blog?: boolean | BlogPostDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["comment"]>
 
   export type CommentSelectScalar = {
     id?: boolean
-    content?: boolean
     authorId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     blogId?: boolean
+    content?: boolean
   }
 
-  export type CommentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "content" | "authorId" | "createdAt" | "updatedAt" | "blogId", ExtArgs["result"]["comment"]>
+  export type CommentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "authorId" | "createdAt" | "updatedAt" | "blogId" | "content", ExtArgs["result"]["comment"]>
   export type CommentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     authoredBy?: boolean | UserDefaultArgs<ExtArgs>
     blog?: boolean | BlogPostDefaultArgs<ExtArgs>
@@ -3675,11 +3675,11 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      content: string
       authorId: string
       createdAt: Date
       updatedAt: Date
       blogId: string
+      content: string
     }, ExtArgs["result"]["comment"]>
     composites: {}
   }
@@ -4106,11 +4106,11 @@ export namespace Prisma {
    */
   interface CommentFieldRefs {
     readonly id: FieldRef<"Comment", 'String'>
-    readonly content: FieldRef<"Comment", 'String'>
     readonly authorId: FieldRef<"Comment", 'String'>
     readonly createdAt: FieldRef<"Comment", 'DateTime'>
     readonly updatedAt: FieldRef<"Comment", 'DateTime'>
     readonly blogId: FieldRef<"Comment", 'String'>
+    readonly content: FieldRef<"Comment", 'String'>
   }
     
 
@@ -5539,10 +5539,10 @@ export namespace Prisma {
   export const BlogPostScalarFieldEnum: {
     id: 'id',
     title: 'title',
-    content: 'content',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
-    published: 'published'
+    published: 'published',
+    content: 'content'
   };
 
   export type BlogPostScalarFieldEnum = (typeof BlogPostScalarFieldEnum)[keyof typeof BlogPostScalarFieldEnum]
@@ -5550,11 +5550,11 @@ export namespace Prisma {
 
   export const CommentScalarFieldEnum: {
     id: 'id',
-    content: 'content',
     authorId: 'authorId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
-    blogId: 'blogId'
+    blogId: 'blogId',
+    content: 'content'
   };
 
   export type CommentScalarFieldEnum = (typeof CommentScalarFieldEnum)[keyof typeof CommentScalarFieldEnum]
@@ -5740,20 +5740,20 @@ export namespace Prisma {
     NOT?: BlogPostWhereInput | BlogPostWhereInput[]
     id?: UuidFilter<"BlogPost"> | string
     title?: StringFilter<"BlogPost"> | string
-    content?: StringFilter<"BlogPost"> | string
     createdAt?: DateTimeFilter<"BlogPost"> | Date | string
     updatedAt?: DateTimeFilter<"BlogPost"> | Date | string
     published?: BoolFilter<"BlogPost"> | boolean
+    content?: StringFilter<"BlogPost"> | string
     comments?: CommentListRelationFilter
   }
 
   export type BlogPostOrderByWithRelationInput = {
     id?: SortOrder
     title?: SortOrder
-    content?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     published?: SortOrder
+    content?: SortOrder
     comments?: CommentOrderByRelationAggregateInput
   }
 
@@ -5763,20 +5763,20 @@ export namespace Prisma {
     OR?: BlogPostWhereInput[]
     NOT?: BlogPostWhereInput | BlogPostWhereInput[]
     title?: StringFilter<"BlogPost"> | string
-    content?: StringFilter<"BlogPost"> | string
     createdAt?: DateTimeFilter<"BlogPost"> | Date | string
     updatedAt?: DateTimeFilter<"BlogPost"> | Date | string
     published?: BoolFilter<"BlogPost"> | boolean
+    content?: StringFilter<"BlogPost"> | string
     comments?: CommentListRelationFilter
   }, "id">
 
   export type BlogPostOrderByWithAggregationInput = {
     id?: SortOrder
     title?: SortOrder
-    content?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     published?: SortOrder
+    content?: SortOrder
     _count?: BlogPostCountOrderByAggregateInput
     _max?: BlogPostMaxOrderByAggregateInput
     _min?: BlogPostMinOrderByAggregateInput
@@ -5788,10 +5788,10 @@ export namespace Prisma {
     NOT?: BlogPostScalarWhereWithAggregatesInput | BlogPostScalarWhereWithAggregatesInput[]
     id?: UuidWithAggregatesFilter<"BlogPost"> | string
     title?: StringWithAggregatesFilter<"BlogPost"> | string
-    content?: StringWithAggregatesFilter<"BlogPost"> | string
     createdAt?: DateTimeWithAggregatesFilter<"BlogPost"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"BlogPost"> | Date | string
     published?: BoolWithAggregatesFilter<"BlogPost"> | boolean
+    content?: StringWithAggregatesFilter<"BlogPost"> | string
   }
 
   export type CommentWhereInput = {
@@ -5799,22 +5799,22 @@ export namespace Prisma {
     OR?: CommentWhereInput[]
     NOT?: CommentWhereInput | CommentWhereInput[]
     id?: UuidFilter<"Comment"> | string
-    content?: StringFilter<"Comment"> | string
     authorId?: UuidFilter<"Comment"> | string
     createdAt?: DateTimeFilter<"Comment"> | Date | string
     updatedAt?: DateTimeFilter<"Comment"> | Date | string
     blogId?: UuidFilter<"Comment"> | string
+    content?: StringFilter<"Comment"> | string
     authoredBy?: XOR<UserScalarRelationFilter, UserWhereInput>
     blog?: XOR<BlogPostScalarRelationFilter, BlogPostWhereInput>
   }
 
   export type CommentOrderByWithRelationInput = {
     id?: SortOrder
-    content?: SortOrder
     authorId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     blogId?: SortOrder
+    content?: SortOrder
     authoredBy?: UserOrderByWithRelationInput
     blog?: BlogPostOrderByWithRelationInput
   }
@@ -5824,22 +5824,22 @@ export namespace Prisma {
     AND?: CommentWhereInput | CommentWhereInput[]
     OR?: CommentWhereInput[]
     NOT?: CommentWhereInput | CommentWhereInput[]
-    content?: StringFilter<"Comment"> | string
     authorId?: UuidFilter<"Comment"> | string
     createdAt?: DateTimeFilter<"Comment"> | Date | string
     updatedAt?: DateTimeFilter<"Comment"> | Date | string
     blogId?: UuidFilter<"Comment"> | string
+    content?: StringFilter<"Comment"> | string
     authoredBy?: XOR<UserScalarRelationFilter, UserWhereInput>
     blog?: XOR<BlogPostScalarRelationFilter, BlogPostWhereInput>
   }, "id">
 
   export type CommentOrderByWithAggregationInput = {
     id?: SortOrder
-    content?: SortOrder
     authorId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     blogId?: SortOrder
+    content?: SortOrder
     _count?: CommentCountOrderByAggregateInput
     _max?: CommentMaxOrderByAggregateInput
     _min?: CommentMinOrderByAggregateInput
@@ -5850,11 +5850,11 @@ export namespace Prisma {
     OR?: CommentScalarWhereWithAggregatesInput[]
     NOT?: CommentScalarWhereWithAggregatesInput | CommentScalarWhereWithAggregatesInput[]
     id?: UuidWithAggregatesFilter<"Comment"> | string
-    content?: StringWithAggregatesFilter<"Comment"> | string
     authorId?: UuidWithAggregatesFilter<"Comment"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Comment"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Comment"> | Date | string
     blogId?: UuidWithAggregatesFilter<"Comment"> | string
+    content?: StringWithAggregatesFilter<"Comment"> | string
   }
 
   export type SessionWhereInput = {
@@ -5995,129 +5995,129 @@ export namespace Prisma {
   export type BlogPostCreateInput = {
     id?: string
     title: string
-    content: string
     createdAt?: Date | string
     updatedAt?: Date | string
     published?: boolean
+    content: string
     comments?: CommentCreateNestedManyWithoutBlogInput
   }
 
   export type BlogPostUncheckedCreateInput = {
     id?: string
     title: string
-    content: string
     createdAt?: Date | string
     updatedAt?: Date | string
     published?: boolean
+    content: string
     comments?: CommentUncheckedCreateNestedManyWithoutBlogInput
   }
 
   export type BlogPostUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     published?: BoolFieldUpdateOperationsInput | boolean
+    content?: StringFieldUpdateOperationsInput | string
     comments?: CommentUpdateManyWithoutBlogNestedInput
   }
 
   export type BlogPostUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     published?: BoolFieldUpdateOperationsInput | boolean
+    content?: StringFieldUpdateOperationsInput | string
     comments?: CommentUncheckedUpdateManyWithoutBlogNestedInput
   }
 
   export type BlogPostCreateManyInput = {
     id?: string
     title: string
-    content: string
     createdAt?: Date | string
     updatedAt?: Date | string
     published?: boolean
+    content: string
   }
 
   export type BlogPostUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     published?: BoolFieldUpdateOperationsInput | boolean
+    content?: StringFieldUpdateOperationsInput | string
   }
 
   export type BlogPostUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     published?: BoolFieldUpdateOperationsInput | boolean
+    content?: StringFieldUpdateOperationsInput | string
   }
 
   export type CommentCreateInput = {
     id?: string
-    content: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    content: string
     authoredBy: UserCreateNestedOneWithoutCommentsInput
     blog: BlogPostCreateNestedOneWithoutCommentsInput
   }
 
   export type CommentUncheckedCreateInput = {
     id?: string
-    content: string
     authorId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     blogId: string
+    content: string
   }
 
   export type CommentUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    content?: StringFieldUpdateOperationsInput | string
     authoredBy?: UserUpdateOneRequiredWithoutCommentsNestedInput
     blog?: BlogPostUpdateOneRequiredWithoutCommentsNestedInput
   }
 
   export type CommentUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
     authorId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     blogId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
   }
 
   export type CommentCreateManyInput = {
     id?: string
-    content: string
     authorId: string
     createdAt?: Date | string
     updatedAt?: Date | string
     blogId: string
+    content: string
   }
 
   export type CommentUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    content?: StringFieldUpdateOperationsInput | string
   }
 
   export type CommentUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
     authorId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     blogId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
   }
 
   export type SessionCreateInput = {
@@ -6337,28 +6337,28 @@ export namespace Prisma {
   export type BlogPostCountOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
-    content?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     published?: SortOrder
+    content?: SortOrder
   }
 
   export type BlogPostMaxOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
-    content?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     published?: SortOrder
+    content?: SortOrder
   }
 
   export type BlogPostMinOrderByAggregateInput = {
     id?: SortOrder
     title?: SortOrder
-    content?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     published?: SortOrder
+    content?: SortOrder
   }
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -6387,29 +6387,29 @@ export namespace Prisma {
 
   export type CommentCountOrderByAggregateInput = {
     id?: SortOrder
-    content?: SortOrder
     authorId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     blogId?: SortOrder
+    content?: SortOrder
   }
 
   export type CommentMaxOrderByAggregateInput = {
     id?: SortOrder
-    content?: SortOrder
     authorId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     blogId?: SortOrder
+    content?: SortOrder
   }
 
   export type CommentMinOrderByAggregateInput = {
     id?: SortOrder
-    content?: SortOrder
     authorId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     blogId?: SortOrder
+    content?: SortOrder
   }
 
   export type SessionCountOrderByAggregateInput = {
@@ -6699,18 +6699,18 @@ export namespace Prisma {
 
   export type CommentCreateWithoutAuthoredByInput = {
     id?: string
-    content: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    content: string
     blog: BlogPostCreateNestedOneWithoutCommentsInput
   }
 
   export type CommentUncheckedCreateWithoutAuthoredByInput = {
     id?: string
-    content: string
     createdAt?: Date | string
     updatedAt?: Date | string
     blogId: string
+    content: string
   }
 
   export type CommentCreateOrConnectWithoutAuthoredByInput = {
@@ -6744,27 +6744,27 @@ export namespace Prisma {
     OR?: CommentScalarWhereInput[]
     NOT?: CommentScalarWhereInput | CommentScalarWhereInput[]
     id?: UuidFilter<"Comment"> | string
-    content?: StringFilter<"Comment"> | string
     authorId?: UuidFilter<"Comment"> | string
     createdAt?: DateTimeFilter<"Comment"> | Date | string
     updatedAt?: DateTimeFilter<"Comment"> | Date | string
     blogId?: UuidFilter<"Comment"> | string
+    content?: StringFilter<"Comment"> | string
   }
 
   export type CommentCreateWithoutBlogInput = {
     id?: string
-    content: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    content: string
     authoredBy: UserCreateNestedOneWithoutCommentsInput
   }
 
   export type CommentUncheckedCreateWithoutBlogInput = {
     id?: string
-    content: string
     authorId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    content: string
   }
 
   export type CommentCreateOrConnectWithoutBlogInput = {
@@ -6825,19 +6825,19 @@ export namespace Prisma {
   export type BlogPostCreateWithoutCommentsInput = {
     id?: string
     title: string
-    content: string
     createdAt?: Date | string
     updatedAt?: Date | string
     published?: boolean
+    content: string
   }
 
   export type BlogPostUncheckedCreateWithoutCommentsInput = {
     id?: string
     title: string
-    content: string
     createdAt?: Date | string
     updatedAt?: Date | string
     published?: boolean
+    content: string
   }
 
   export type BlogPostCreateOrConnectWithoutCommentsInput = {
@@ -6894,83 +6894,83 @@ export namespace Prisma {
   export type BlogPostUpdateWithoutCommentsInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     published?: BoolFieldUpdateOperationsInput | boolean
+    content?: StringFieldUpdateOperationsInput | string
   }
 
   export type BlogPostUncheckedUpdateWithoutCommentsInput = {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     published?: BoolFieldUpdateOperationsInput | boolean
+    content?: StringFieldUpdateOperationsInput | string
   }
 
   export type CommentCreateManyAuthoredByInput = {
     id?: string
-    content: string
     createdAt?: Date | string
     updatedAt?: Date | string
     blogId: string
+    content: string
   }
 
   export type CommentUpdateWithoutAuthoredByInput = {
     id?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    content?: StringFieldUpdateOperationsInput | string
     blog?: BlogPostUpdateOneRequiredWithoutCommentsNestedInput
   }
 
   export type CommentUncheckedUpdateWithoutAuthoredByInput = {
     id?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     blogId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
   }
 
   export type CommentUncheckedUpdateManyWithoutAuthoredByInput = {
     id?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     blogId?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
   }
 
   export type CommentCreateManyBlogInput = {
     id?: string
-    content: string
     authorId: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    content: string
   }
 
   export type CommentUpdateWithoutBlogInput = {
     id?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    content?: StringFieldUpdateOperationsInput | string
     authoredBy?: UserUpdateOneRequiredWithoutCommentsNestedInput
   }
 
   export type CommentUncheckedUpdateWithoutBlogInput = {
     id?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
     authorId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    content?: StringFieldUpdateOperationsInput | string
   }
 
   export type CommentUncheckedUpdateManyWithoutBlogInput = {
     id?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
     authorId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    content?: StringFieldUpdateOperationsInput | string
   }
 
 

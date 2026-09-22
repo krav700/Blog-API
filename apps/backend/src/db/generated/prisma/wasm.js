@@ -107,19 +107,19 @@ exports.Prisma.UserScalarFieldEnum = {
 exports.Prisma.BlogPostScalarFieldEnum = {
   id: 'id',
   title: 'title',
-  content: 'content',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  published: 'published'
+  published: 'published',
+  content: 'content'
 };
 
 exports.Prisma.CommentScalarFieldEnum = {
   id: 'id',
-  content: 'content',
   authorId: 'authorId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  blogId: 'blogId'
+  blogId: 'blogId',
+  content: 'content'
 };
 
 exports.Prisma.SessionScalarFieldEnum = {
@@ -168,6 +168,10 @@ const config = {
         "fromEnvVar": null,
         "value": "darwin-arm64",
         "native": true
+      },
+      {
+        "fromEnvVar": null,
+        "value": "debian-openssl-3.0.x"
       }
     ],
     "previewFeatures": [
@@ -196,13 +200,13 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider        = \"prisma-client-js\"\n  output          = \"../src/db/generated/prisma\"\n  previewFeatures = [\"driverAdapters\"]\n}\n\ndatasource db {\n  provider  = \"postgresql\"\n  url       = env(\"DATABASE_URL\")\n  directUrl = env(\"DIRECT_URL\")\n}\n\nmodel User {\n  id             String    @id @default(uuid()) @db.Uuid\n  firstName      String    @db.VarChar(50)\n  lastName       String    @db.VarChar(50)\n  email          String    @unique\n  username       String    @unique @db.VarChar(50)\n  hash           String\n  salt           String\n  iterationCount Int\n  isAdmin        Boolean   @default(false)\n  comments       Comment[]\n}\n\nmodel BlogPost {\n  id String @id @default(uuid()) @db.Uuid\n\n  title   String\n  content String\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  published Boolean @default(false)\n\n  comments Comment[]\n}\n\nmodel Comment {\n  id String @id @default(uuid()) @db.Uuid\n\n  content String\n\n  authorId   String @db.Uuid\n  authoredBy User   @relation(fields: [authorId], references: [id])\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  blogId String   @db.Uuid\n  blog   BlogPost @relation(fields: [blogId], references: [id], onDelete: Cascade)\n}\n\nmodel Session {\n  id        String   @id\n  sid       String   @unique\n  data      String\n  expiresAt DateTime\n}\n",
-  "inlineSchemaHash": "141a3893553db7c50b216ea12f332b58a9693bebef3f16fc22cc83d0cf29778b",
+  "inlineSchema": "generator client {\n  provider        = \"prisma-client-js\"\n  output          = \"../src/db/generated/prisma\"\n  previewFeatures = [\"driverAdapters\"]\n  binaryTargets   = [\"native\", \"debian-openssl-3.0.x\"]\n}\n\ndatasource db {\n  provider  = \"postgresql\"\n  url       = env(\"DATABASE_URL\")\n  directUrl = env(\"DIRECT_URL\")\n}\n\nmodel User {\n  id             String    @id @default(uuid()) @db.Uuid\n  firstName      String    @db.VarChar(50)\n  lastName       String    @db.VarChar(50)\n  email          String    @unique\n  username       String    @unique @db.VarChar(50)\n  hash           String\n  salt           String\n  iterationCount Int\n  isAdmin        Boolean   @default(false)\n  comments       Comment[]\n}\n\nmodel BlogPost {\n  id        String    @id @default(uuid()) @db.Uuid\n  title     String\n  createdAt DateTime  @default(now())\n  updatedAt DateTime  @updatedAt\n  published Boolean   @default(false)\n  content   String\n  comments  Comment[]\n}\n\nmodel Comment {\n  id         String   @id @default(uuid()) @db.Uuid\n  authorId   String   @db.Uuid\n  createdAt  DateTime @default(now())\n  updatedAt  DateTime @updatedAt\n  blogId     String   @db.Uuid\n  content    String\n  authoredBy User     @relation(fields: [authorId], references: [id])\n  blog       BlogPost @relation(fields: [blogId], references: [id], onDelete: Cascade)\n}\n\nmodel Session {\n  id        String   @id\n  sid       String   @unique\n  data      String\n  expiresAt DateTime\n}\n",
+  "inlineSchemaHash": "3d429a8853c4722fcee57f38b6966cd27608bb77b45a455e3f1216c35aefed1c",
   "copyEngine": true
 }
 config.dirname = '/'
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"firstName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"lastName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"username\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"hash\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"salt\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"iterationCount\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"isAdmin\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"comments\",\"kind\":\"object\",\"type\":\"Comment\",\"relationName\":\"CommentToUser\"}],\"dbName\":null},\"BlogPost\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"content\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"published\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"comments\",\"kind\":\"object\",\"type\":\"Comment\",\"relationName\":\"BlogPostToComment\"}],\"dbName\":null},\"Comment\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"content\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"authorId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"authoredBy\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"CommentToUser\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"blogId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"blog\",\"kind\":\"object\",\"type\":\"BlogPost\",\"relationName\":\"BlogPostToComment\"}],\"dbName\":null},\"Session\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"sid\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"data\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"expiresAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"firstName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"lastName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"username\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"hash\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"salt\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"iterationCount\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"isAdmin\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"comments\",\"kind\":\"object\",\"type\":\"Comment\",\"relationName\":\"CommentToUser\"}],\"dbName\":null},\"BlogPost\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"published\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"content\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"comments\",\"kind\":\"object\",\"type\":\"Comment\",\"relationName\":\"BlogPostToComment\"}],\"dbName\":null},\"Comment\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"authorId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"blogId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"content\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"authoredBy\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"CommentToUser\"},{\"name\":\"blog\",\"kind\":\"object\",\"type\":\"BlogPost\",\"relationName\":\"BlogPostToComment\"}],\"dbName\":null},\"Session\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"sid\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"data\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"expiresAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.engineWasm = {
   getRuntime: async () => require('./query_engine_bg.js'),
