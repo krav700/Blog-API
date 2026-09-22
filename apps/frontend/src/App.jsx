@@ -1,38 +1,60 @@
-import { useState, useEffect } from 'react'
-import './App.css'
+import { Outlet } from "react-router-dom";
+import { useState, useEffect } from "react";
+import fetchApi from "./api/api";
 
 function App() {
-  const [message, setMessage] = useState('');
+    const [user, setUser] = useState();
+    const [logout, setLogout] = useState(false);
 
-
-  useEffect(() => {
-    const fetchUsers = async () => {
-        try {
-          const response = await fetch('/api', {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem('token')}`
+    useEffect(() => {
+        async function isLoggedIn() {
+            try {
+                const response = await fetchApi(`/api/auth/me`, "GET");
+                setUser(response.user);
+                return;
+            } catch (err) {
+                console.log('User not logged in');
             }
-          });
-          console.log(response)
-          if (!response.ok) {
-            throw new Error('Network response was not okay');
-          }
-          const data = await response.json();
-          console.log(data.message)
-          setMessage(data.message);
-        } catch (err) {
-          console.log(err);
         }
-      }
-    fetchUsers()
-  }, [])
+        isLoggedIn();
+    }, [logout]);
 
-  return (
-    <>
-      <h1>Blog API</h1>
-      <h2>{message ?? ''}</h2>
-    </>
-  )
+    async function Logout() {
+        try {
+            await fetchApi(`/api/auth/logout`, "POST");
+            setUser(null);
+            setLogout(true);
+            return window.alert("Successfully Logged out!");
+        } catch (err) {
+            console.log(err);
+            throw err;
+        }
+    }
+
+    return (
+        <>
+            <div className="absolute top-0 right-0 p-4 z-10">
+                {user ? (
+                    <button
+                        onClick={Logout}
+                        className="cursor-pointer bg-transparent font-medium text-sm text-mist-500"
+                    >
+                        Log out
+                    </button>
+                ) : (
+                    <button
+                        onClick={() => { window.location.href = '/auth/login'; }}
+                        className="cursor-pointer bg-transparent font-medium text-sm text-mist-500"
+                    >
+                        Log in
+                    </button>
+                )}
+            </div>
+            <main>
+                <Outlet context={{user, setUser}} />
+            </main>
+        </>
+    );
 }
 
-export default App
+export default App;

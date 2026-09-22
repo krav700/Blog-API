@@ -75,12 +75,12 @@ function Blogs() {
                             key={blog.id}
                             viewTransition
                         >
-                            <div className="grid grid-cols-[2fr_2fr_1fr] justify-start items-start gap-4 max-h-5 min-w-0 overflow-hidden">
-                                <h2 className="text-sm sm:text-base min-w-0 text-ellipsis text-start whitespace-nowrap overflow-hidden max-h-5">
+                            <div className="grid grid-cols-[2fr_2fr_1fr] justify-start items-start gap-4 max-h-6 min-w-0 overflow-hidden">
+                                <h2 className="scrollbar-none text-sm sm:text-base min-w-0 text-ellipsis text-start whitespace-nowrap overflow-hidden max-h-6">
                                     {blog.title}
                                 </h2>
 
-                                <h3 className="text-xs sm:text-sm min-w-0 text-ellipsis text-start whitespace-nowrap overflow-hidden max-h-5">
+                                <h3 className="scrollbar-none text-xs sm:text-sm min-w-0 text-ellipsis text-start whitespace-nowrap overflow-hidden max-h-6">
                                     {strip(blog.content)}
                                 </h3>
 

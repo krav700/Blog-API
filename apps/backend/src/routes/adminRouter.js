@@ -3,8 +3,6 @@ const adminController = require("../controllers/adminController.js");
 
 const adminRouter = Router();
 
-adminRouter.get("/me", adminController.getCurrentUser );
-
 adminRouter.get("/users", adminController.getAllUsers );
 adminRouter.get("/users/pages/:pageNum", adminController.getUsersByPage );
 adminRouter.put("/users/:userId", adminController.updateUser );

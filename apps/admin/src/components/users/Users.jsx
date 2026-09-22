@@ -100,15 +100,15 @@ function Users() {
                     users.map((user) => (
                         <div className="border w-full p-5" key={user.id}>
                             <div className="grid grid-cols-[1fr_1fr_1fr_1fr_1fr] justify-start justify-items-start items-center gap-4 max-h-max min-w-0 overflow-hidden">
-                                <h2 className="overflow-x-scroll text-xs sm:text-sm text-start whitespace-nowrap max-w-full">
+                                <h2 className="scrollbar-none overflow-x-scroll text-xs sm:text-sm text-start whitespace-nowrap max-w-full">
                                     {user.firstName} {user.lastName}
                                 </h2>
 
-                                <h3 className="overflow-x-scroll text-xs sm:text-sm text-start whitespace-nowrap max-w-full">
+                                <h3 className="scrollbar-none overflow-x-scroll text-xs sm:text-sm text-start whitespace-nowrap max-w-full">
                                     {user.email}
                                 </h3>
 
-                                <h3 className="overflow-x-scroll text-xs sm:text-sm text-start whitespace-nowrap max-w-full">
+                                <h3 className="scrollbar-none overflow-x-scroll text-xs sm:text-sm text-start whitespace-nowrap max-w-full">
                                     {user.username}
                                 </h3>
 

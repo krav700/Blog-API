@@ -3,6 +3,8 @@ const authController = require("../controllers/authController.js");
 
 const authRouter = Router();
 
+authRouter.get("/me", authController.getCurrentUser);
+
 authRouter.post("/login", authController.loginUser);
 authRouter.get("/login", authController.getLoginForm);
 

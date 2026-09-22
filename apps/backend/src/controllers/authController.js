@@ -72,6 +72,35 @@ const validateRegister = [
         .withMessage("Confirm Password does not match Password."),
 ];
 
+async function getCurrentUser(req, res, next) {
+    try {
+        if (!req.user) {
+            return res.status(401).json({
+                message: "Not authenticated",
+            });
+        }
+
+        const user = await prisma.user.findUnique({
+            where: {
+                id: req.user?.id,
+            },
+            omit: {
+                hash: true,
+                salt: true,
+                iterationCount: true,
+            },
+        });
+
+        if (!user) {
+            console.log("User does not exist");
+            return res.status(404).json({ message: "User not found" });
+        }
+        return res.json({ user });
+    } catch (err) {
+        return res.json({ error: err.message });
+    }
+}
+
 function getLoginForm(req, res, next) {
     return res.json({ message: "this is a login form" });
 }
@@ -192,6 +221,7 @@ function logoutUser(req, res, next) {
 }
 
 module.exports = {
+    getCurrentUser,
     getLoginForm,
     loginUser,
     getRegisterForm,

@@ -2,7 +2,14 @@ const { prisma } = require("../lib/prisma.js");
 
 async function getBlogs(req, res, next) {
     try {
-        const blogs = await prisma.blogPost.findMany();
+        const blogs = await prisma.blogPost.findMany({
+            where: {
+                published: true,
+            },
+            orderBy: {
+                createdAt: 'desc',
+            },
+        });
         return res.json({ blogs });
     } catch (err) {
         return res.json({ error: err.message });
@@ -15,6 +22,20 @@ async function getBlogById(req, res, next) {
             where: {
                 id: req.params.blogId,
             },
+            include: {
+                comments: {
+                    orderBy: {
+                        createdAt: "asc",
+                    },
+                    include: {
+                        authoredBy: {
+                            select: {
+                                username: true,
+                            },
+                        },
+                    },
+                }
+            }
         });
         return res.json({ blog });
     } catch (err) {
@@ -67,7 +88,20 @@ async function postBlogComment(req, res, next) {
                 blogId: req.params.blogId,
             },
         });
-        return res.json({ message: "Comment created!" });
+        const comments = await prisma.comment.findMany({
+            where: {
+                blogId: req.params.blogId,
+            },
+            include: {
+                authoredBy: {
+                    select: {
+                        username: true,
+                    },
+                },
+            },
+        })
+        console.log(comments)
+        return res.json({ message: "Comment created!", comments });
     } catch (err) {
         return res.json({ error: err.message });
     }
