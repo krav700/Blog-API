@@ -31,6 +31,14 @@ const routes = [
                 errorElement: <CustomErrorBoundary />,
                 children: [
                     {
+                        path: "/",
+                        element: <Blogs />,
+                    },
+                    {
+                        path: "admin/",
+                        element: <Blogs />,
+                    },
+                    {
                         path: "admin/blogs",
                         element: <Blogs />,
                     },
