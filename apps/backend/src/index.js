@@ -5,7 +5,6 @@ const passport = require("passport");
 const path = require("node:path");
 const app = express();
 const { PrismaSessionStore } = require('@quixo3/prisma-session-store')
-const { PrismaClient } = require('@prisma/client')
 const { prisma } = require('./lib/prisma.js')
 const indexRouter = require("./routes/indexRouter.js");
 
@@ -49,20 +48,3 @@ app.listen(process.env.PORT ?? PORT, (error) => {
     }
     console.log(`File Upload - listening on port ${PORT}!`);
 });
-
-// app.use((err, req, res, next) => {
-//     console.error(err);
-
-//     const status = Number(err.statusCode || err.status || 500);
-
-//     res.status(status).render("errorPages/errorPage", {
-//         errorMessage: err.message,
-//     });
-// });
-
-// app.use((req, res) => {
-//     res.status(404).render("errorPages/404", {
-//         title: "404",
-//         pageURL: req.path,
-//     });
-// });
