@@ -1,9 +1,10 @@
 const { Router } = require("express");
 const authController = require("../controllers/authController.js");
+const verifyToken = require("../lib/verifyToken.js");
 
 const authRouter = Router();
 
-authRouter.get("/me", authController.getCurrentUser);
+authRouter.get("/me", verifyToken, authController.getCurrentUser);
 
 authRouter.post("/login", authController.loginUser);
 authRouter.get("/login", authController.getLoginForm);

@@ -24,6 +24,7 @@ function App() {
             await fetchApi(`/api/auth/logout`, "POST");
             setUser(null);
             setLogout(true);
+            localStorage.removeItem("token")
             return window.alert("Successfully Logged out!");
         } catch (err) {
             console.log(err);
@@ -33,18 +34,18 @@ function App() {
 
     return (
         <>
-            <div className="absolute top-0 right-0 p-4 z-10">
+            <div className="fixed top-0 right-0 p-4 z-10">
                 {user ? (
                     <button
                         onClick={Logout}
-                        className="cursor-pointer bg-transparent font-medium text-sm text-mist-500"
+                        className="cursor-pointer bg-mist-800 px-2 py-1 font-medium text-sm text-mist-500"
                     >
                         Log out
                     </button>
                 ) : (
                     <button
                         onClick={() => { window.location.href = '/auth/login'; }}
-                        className="cursor-pointer bg-transparent font-medium text-sm text-mist-500"
+                        className="cursor-pointer bg-mist-800 px-2 py-1 font-medium text-sm text-mist-500"
                     >
                         Log in
                     </button>

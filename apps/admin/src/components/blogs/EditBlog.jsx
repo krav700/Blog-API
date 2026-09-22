@@ -226,7 +226,7 @@ function EditBlog() {
                                 onClick={() => {
                                     deleteComment(comment.id);
                                 }}
-                                className="bg-red-900 text-white border border-gray-500"
+                                className="bg-red-900 text-white border border-gray-500 rounded-none"
                             >
                                 Delete
                             </button>

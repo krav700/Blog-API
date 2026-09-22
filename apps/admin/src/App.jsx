@@ -31,6 +31,7 @@ function App() {
     async function Logout() {
         try {
             await fetchApi(`/api/auth/logout`, "POST");
+            localStorage.removeItem("token")
             setLogout(true);
             return window.alert("Successfully Logged out!");
         } catch (err) {

@@ -11,10 +11,6 @@ async function fetchApi(path, methodType, bodyParams) {
             ...(bodyParams && { body: JSON.stringify(bodyParams) }),
         });
 
-        if (response.status === 403) {
-            window.location.href = "/auth/login"
-        }
-
         const data = await response.json();
         if (!response.ok && response.status !== 400 || data.error) {
             console.log(data)

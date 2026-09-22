@@ -50,6 +50,7 @@ function BlogView() {
                 { content: commentBody },
             );
             console.log(response)
+            setCommentBody('')
             setComments(response.comments);
         } catch (err) {
             console.log(err);
@@ -102,6 +103,7 @@ function BlogView() {
                 {user ? (
                     <div className="flex flex-col my-2 gap-2">
                         <textarea
+                            value={commentBody}
                             name="content"
                             id="content"
                             rows={3}
