@@ -20,6 +20,10 @@ A Blog-API application consisting of a backend, client-facing app, and an admin 
 - lucide-react - Icons
 - Vercel - Deployment
 
+#### Preview [admin!](https://blog-api-admin-snowy.vercel.app/auth/login)
+
+#### Preview [client!](https://blog-api-frontend-eta.vercel.app/blogs)
+
 ### Preview of the interfaces
 
 ![Screenshot](./public/Screenshot.png)
