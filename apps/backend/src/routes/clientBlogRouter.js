@@ -1,16 +1,15 @@
 const { Router } = require("express");
 const blogController = require("../controllers/blogController.js");
-const verifyToken = require('../lib/verifyToken.js')
 
 const clientBlogRouter = Router();
 
-clientBlogRouter.get("/", verifyToken, blogController.getBlogs);
+clientBlogRouter.get("/", blogController.getBlogs);
 
-clientBlogRouter.get("/:blogId", verifyToken, blogController.getBlogById);
+clientBlogRouter.get("/:blogId", blogController.getBlogById);
 
-clientBlogRouter.get("/:blogId/comments", verifyToken, blogController.getBlogComments);
-clientBlogRouter.put("/:blogId/comments/:commentId", verifyToken, blogController.updateBlogComment );
-clientBlogRouter.post("/:blogId/comments", verifyToken, blogController.postBlogComment);
-clientBlogRouter.delete("/:blogId/comments/:commentId", verifyToken, blogController.deleteBlogComment);
+clientBlogRouter.get("/:blogId/comments", blogController.getBlogComments);
+clientBlogRouter.put("/:blogId/comments/:commentId", blogController.updateBlogComment );
+clientBlogRouter.post("/:blogId/comments", blogController.postBlogComment);
+clientBlogRouter.delete("/:blogId/comments/:commentId", blogController.deleteBlogComment);
 
 module.exports = clientBlogRouter;
