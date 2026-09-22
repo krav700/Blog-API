@@ -44,7 +44,7 @@ function Register() {
             {errors ? (
                 <div className="flex flex-col justify-center items-center p-5">
                     {errors.map((error) => (
-                        <div>
+                        <div key={error.msg}>
                             <h3 className="text-sm text-red-500">
                                 {error.msg}
                             </h3>

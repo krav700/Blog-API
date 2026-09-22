@@ -46,5 +46,5 @@ app.listen(process.env.PORT ?? PORT, (error) => {
     if (error) {
         throw error;
     }
-    console.log(`File Upload - listening on port ${PORT}!`);
+    console.log(`Blog API - listening on port ${PORT}!`);
 });
