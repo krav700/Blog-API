@@ -41,8 +41,8 @@ app.use(passport.session());
 
 app.use("/api", indexRouter);
 
-const PORT = 3000;
-app.listen(process.env.PORT ?? PORT, (error) => {
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, "0.0.0.0", (error) => {
     if (error) {
         throw error;
     }
