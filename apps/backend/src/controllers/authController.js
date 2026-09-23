@@ -75,8 +75,6 @@ const validateRegister = [
 async function getCurrentUser(req, res, next) {
     try {
         if (!req.user) {
-            console.log('hello')
-            console.log(req.user)
             return res.status(401).json({
                 message: "Not authenticated",
             });

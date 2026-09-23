@@ -18,7 +18,9 @@ const verifyCallback = async (username, password, done) => {
 
         if (!user) {
             console.log("no user");
-            return done(null, false, { error: "Incorrect username or password" });
+            return done(null, false, {
+                error: "Incorrect username or password",
+            });
         }
 
         const isValid = validPassword(

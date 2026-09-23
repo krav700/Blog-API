@@ -13,9 +13,9 @@ async function main() {
             isAdmin: true,
             hash: "123",
             salt: "123",
-            iterationCount: 60000
-        }
-    })
+            iterationCount: 60000,
+        },
+    });
     console.log("done");
 }
 
@@ -27,4 +27,4 @@ main()
     })
     .finally(async () => {
         await prisma.$disconnect();
-    })
+    });

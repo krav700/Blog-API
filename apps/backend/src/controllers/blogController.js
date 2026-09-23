@@ -7,7 +7,7 @@ async function getBlogs(req, res, next) {
                 published: true,
             },
             orderBy: {
-                createdAt: 'desc',
+                createdAt: "desc",
             },
         });
         return res.json({ blogs });
@@ -34,8 +34,8 @@ async function getBlogById(req, res, next) {
                             },
                         },
                     },
-                }
-            }
+                },
+            },
         });
         return res.json({ blog });
     } catch (err) {
@@ -99,8 +99,8 @@ async function postBlogComment(req, res, next) {
                     },
                 },
             },
-        })
-        console.log(comments)
+        });
+
         return res.json({ message: "Comment created!", comments });
     } catch (err) {
         return res.json({ error: err.message });

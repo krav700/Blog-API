@@ -4,11 +4,11 @@ const express = require("express");
 const passport = require("passport");
 const path = require("node:path");
 const app = express();
-const { PrismaSessionStore } = require('@quixo3/prisma-session-store')
-const { prisma } = require('./lib/prisma.js')
+const { PrismaSessionStore } = require("@quixo3/prisma-session-store");
+const { prisma } = require("./lib/prisma.js");
 const indexRouter = require("./routes/indexRouter.js");
 
-const cors = require('cors');
+const cors = require("cors");
 
 require("./config/passport.js");
 
@@ -21,14 +21,11 @@ app.use(cors());
 
 app.use(
     session({
-        store: new PrismaSessionStore(
-            prisma,
-            {
-                checkPeriod: 2 * 60 * 1000,
-                dbRecordIdIsSessionId: true,
-                dbRecordIdFunction: undefined,
-            }
-        ),
+        store: new PrismaSessionStore(prisma, {
+            checkPeriod: 2 * 60 * 1000,
+            dbRecordIdIsSessionId: true,
+            dbRecordIdFunction: undefined,
+        }),
         secret: process.env.SESSION_SECRET,
         resave: false,
         saveUninitialized: false,

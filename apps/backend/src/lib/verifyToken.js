@@ -9,11 +9,10 @@ function verifyToken(req, res, next) {
         jwt.verify(req.token, process.env.JWT_SECRET_KEY, (err, authData) => {
             if (err) {
                 console.log("Failed token verification");
-                console.log(err)
+                console.log(err);
                 return res.status(403).json({ error: "Authentication failed" });
             }
             req.user = authData.id;
-            console.log(req.user)
         });
 
         return next();
